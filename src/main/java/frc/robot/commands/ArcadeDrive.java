@@ -18,19 +18,27 @@ public class ArcadeDrive extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    RobotContainer.m_DriveTrain.resetEncoders();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
 
-    double speed = RobotContainer.m_driverController.getRawAxis(OperatorConstants.DriveSpeed);
-    double rotation = RobotContainer.m_driverController.getRawAxis(OperatorConstants.DriveRotate);
+    double speed = RobotContainer.m_driverController.getRawAxis(OperatorConstants.driveSpeed);
+    double rotation = RobotContainer.m_driverController.getRawAxis(OperatorConstants.driveRotate);
 
-    speed *= Constants.motorLimit;
-    rotation *= Constants.motorLimit;
+    speed *= Constants.speedMultiplier;
+    rotation *= Constants.speedMultiplier;
 
     RobotContainer.m_DriveTrain.arcadeDrive(speed, rotation);
+
+    
+    //Just testing if the method works without making an auto command
+    if (RobotContainer.m_driverController.a().getAsBoolean()) {
+      System.out.println(RobotContainer.m_DriveTrain.getDriveEncoder());
+    }
   }
 
   // Called once the command ends or is interrupted.

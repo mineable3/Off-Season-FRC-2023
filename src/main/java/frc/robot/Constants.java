@@ -18,12 +18,17 @@ public final class Constants {
   public static final int leftmotorID2 = 4;
   public static final int rightmotorID1 = 1;
   public static final int rightmotorID2 = 2;
-  public static final double motorLimit = 0.5;
+  public static final double speedMultiplier = 0.5;
+  public static final int pigeonID = 0;
 
   public static class OperatorConstants {
 
-    public static final int DriveSpeed = 1;
-    public static final int DriveRotate = 4;
+    //joystick axis for arcade drive
+    public static final int driveSpeed = 1;
+    public static final int driveRotate = 4;
+
+    public static final int driveLeft = 1;
+    public static final int driveRight = 5;
 
     public static final int kDriverControllerPort = 0;
   }
