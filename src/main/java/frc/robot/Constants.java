@@ -18,6 +18,7 @@ public final class Constants {
   public static final int leftmotorID2 = 4;
   public static final int rightmotorID1 = 1;
   public static final int rightmotorID2 = 2;
+  public static final int turretmotorID = 5;
   public static final double speedMultiplier = 0.5;
   public static final int pigeonID = 0;
 
