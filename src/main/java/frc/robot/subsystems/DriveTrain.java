@@ -4,8 +4,8 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.sensors.PigeonIMU;
-import com.ctre.phoenixpro.hardware.Pigeon2;
+import com.ctre.phoenix.sensors.Pigeon2;
+import com.ctre.phoenix.sensors.Pigeon2.AxisDirection;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import frc.robot.Constants;
@@ -39,30 +39,32 @@ public class DriveTrain extends SubsystemBase {
 
     //inverting one side of the robot so we drive straight
     rightTrain.setInverted(true);
+
+    gyro.configMountPose(AxisDirection.NegativeY, AxisDirection.PositiveZ);
+
   }
 
 
   //gryo commands/methods
   public double getYaw() {
-    return gyro.getAngle();
+    return gyro.getYaw();
   }
   public void resetYaw() {
     gyro.setYaw(0);
   }
-  public void setYaw(int newYaw) {
-    gyro.setYaw(newYaw);
+  public double getPitch() {
+    return gyro.getPitch();
+  }
+  public void resetPitch() {
+  }
+  public double getRoll() {
+    return gyro.getRoll();
   }
 
 
   //drive train commands/methods
   public double getDriveEncoder(){
     return leftmotor1.getEncoder().getPosition();
-  }
-  public void setEncoders(double newValue) {
-    leftmotor1.getEncoder().setPosition(newValue);
-    leftmotor2.getEncoder().setPosition(newValue);
-    rightmotor1.getEncoder().setPosition(newValue);
-    rightmotor2.getEncoder().setPosition(newValue);
   }
   public void resetEncoders(){
     leftmotor1.getEncoder().setPosition(0);
