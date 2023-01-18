@@ -7,8 +7,11 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.TankDrive;
+import frc.robot.commands.TurretSpin;
 import frc.robot.commands.Autos;
+import frc.robot.commands.ClawGrab;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Turret;
@@ -27,6 +30,7 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   public final static DriveTrain m_DriveTrain = new DriveTrain();
   public final static Turret m_Turret = new Turret();
+  public final static Claw m_Claw = new Claw();
   
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
@@ -38,6 +42,8 @@ public class RobotContainer {
     // Configure the trigger bindings
     m_DriveTrain.setDefaultCommand(new ArcadeDrive());
     //m_DriveTrain.setDefaultCommand(new TankDrive());
+    m_Turret.setDefaultCommand(new TurretSpin());
+    m_Claw.setDefaultCommand(new ClawGrab());
     configureBindings();
   }
 

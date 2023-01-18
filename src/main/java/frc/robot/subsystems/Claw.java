@@ -9,6 +9,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 public class Claw extends SubsystemBase {
   /** Creates a new Claw. */
@@ -20,8 +21,10 @@ public class Claw extends SubsystemBase {
 
   }
 
-  public void moveClaw(double speed) {
-    grabbyMotor.set(speed);
+  public void changeClawSate(boolean change) {
+    grabbyMotor.set(.5);
+    new WaitCommand(.5);
+    grabbyMotor.set(0);
   }
 
   @Override
