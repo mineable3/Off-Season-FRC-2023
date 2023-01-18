@@ -27,8 +27,8 @@ public class TankDrive extends CommandBase {
     double leftSpeed = RobotContainer.m_driverController.getRawAxis(OperatorConstants.driveLeft);
     double rightSpeed = RobotContainer.m_driverController.getRawAxis(OperatorConstants.driveRight);
 
-    leftSpeed *= Constants.speedMultiplier;
-    rightSpeed *= Constants.speedMultiplier;
+    leftSpeed *= Constants.driveSpeedMultiplier;
+    rightSpeed *= Constants.driveSpeedMultiplier;
 
     RobotContainer.m_DriveTrain.tankDrive(leftSpeed, rightSpeed);
   }

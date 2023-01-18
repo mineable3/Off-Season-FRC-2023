@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
 public class TurretSpin extends CommandBase {
@@ -21,10 +22,14 @@ public class TurretSpin extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
     double lTrigger = RobotContainer.m_driverController.getLeftTriggerAxis();
     double rTrigger = RobotContainer.m_driverController.getRightTriggerAxis();
 
-    RobotContainer.m_Turret.turnTurret((lTrigger - rTrigger));
+    lTrigger *= Constants.turretSpeedMultiplier;
+    rTrigger *= Constants.turretSpeedMultiplier;
+
+    RobotContainer.m_Turret.turnTurret((rTrigger - lTrigger));
   }
 
   // Called once the command ends or is interrupted.

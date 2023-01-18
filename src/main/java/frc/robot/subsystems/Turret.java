@@ -12,16 +12,39 @@ import frc.robot.Constants;
 
 public class Turret extends SubsystemBase {
   /** Creates a new Turret. */
+
   CANSparkMax turny;
 
   public Turret() {
 
+    //the motor that turn the turret
     turny = new CANSparkMax(Constants.turretmotorID, MotorType.kBrushless);
 
   }
 
+  //a method to move the turret
   public void turnTurret(double speed) {
-    turny.set(speed);
+
+    //checks we are inside the turrets thresholds
+    if((turny.getEncoder().getPosition() < Constants.turretUpperThreshold) &&
+      (turny.getEncoder().getPosition() > Constants.turretLowerThreshold)) {
+      turny.set(speed);
+    }
+
+      //checks if we past the lower threshold and if so are we correcting that 
+    else if((turny.getEncoder().getPosition() > Constants.turretLowerThreshold) && (speed > 0)){
+      turny.set(speed);
+    }
+
+      //check if we past the upper threshold and if so are we correcting that
+    else if ((turny.getEncoder().getPosition() < Constants.turretUpperThreshold) && (speed < 0)) {
+      turny.set(speed);
+    }
+
+      //stops the motor because we past a threshold and we're not trying to correct it
+    else {
+      turny.set(0);
+    }
   }
 
   @Override

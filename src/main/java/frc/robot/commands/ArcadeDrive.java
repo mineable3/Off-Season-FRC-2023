@@ -29,8 +29,8 @@ public class ArcadeDrive extends CommandBase {
     double speed = RobotContainer.m_driverController.getRawAxis(OperatorConstants.driveSpeed);
     double rotation = RobotContainer.m_driverController.getRawAxis(OperatorConstants.driveRotate);
 
-    speed *= Constants.speedMultiplier;
-    rotation *= Constants.speedMultiplier;
+    speed *= Constants.driveSpeedMultiplier;
+    rotation *= Constants.driveSpeedMultiplier;
 
     RobotContainer.m_DriveTrain.arcadeDrive(speed, rotation);
 
