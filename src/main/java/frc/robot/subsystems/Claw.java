@@ -6,7 +6,6 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -16,6 +15,7 @@ public class Claw extends SubsystemBase {
 
   public Claw() {
 
+    //the motor that opens and shuts the claw
     clawMotor = new CANSparkMax(Constants.clawMotorID, MotorType.kBrushless);
 
   }
@@ -24,10 +24,11 @@ public class Claw extends SubsystemBase {
     clawMotor.set(speed);
   }
 
+
+  //Encoder methods
   public double getEncoder(){
     return clawMotor.getEncoder().getPosition();
   }
-
   public void resetEncoder() {
     clawMotor.getEncoder().setPosition(0);
   }

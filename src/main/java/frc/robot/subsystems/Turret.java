@@ -22,10 +22,11 @@ public class Turret extends SubsystemBase {
 
   }
 
+
+  //Encoder methods
   public double getTurretEncoder() {
     return turretMotor.getEncoder().getPosition();
   }
-
   public void resetTurretEncoder() {
     turretMotor.getEncoder().getPosition();
   }

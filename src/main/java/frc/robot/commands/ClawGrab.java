@@ -26,19 +26,24 @@ public class ClawGrab extends CommandBase {
   @Override
   public void execute() {
 
-    if (RobotContainer.m_auxController.b().getAsBoolean()){
-    System.out.println("ClawGrab has just started its execute method");
 
+    // is the B button pressed
+    if (RobotContainer.m_auxController.b().getAsBoolean()){
+
+    //if the claw is open the close it and change the isOpen variable
     if(isOpen) {
       RobotContainer.m_Claw.moveClaw(.5);
       isOpen = false;
+
+    //if the claw is closed then open it and change the isOpen variable
     } else {
       RobotContainer.m_Claw.moveClaw(-.5);
       isOpen = true;
     }
-    System.out.println("starting the wait command");
+    //waiting for the claw to finish opening or closing
     new WaitCommand(1);
-    System.out.println("finished the wait command");
+
+    //stops the claw in place
     RobotContainer.m_Claw.moveClaw(0);
     }
   }
