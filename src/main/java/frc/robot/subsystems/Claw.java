@@ -12,16 +12,24 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Claw extends SubsystemBase {
   /** Creates a new Claw. */
-  CANSparkMax grabbyMotor;
+  CANSparkMax clawMotor;
 
   public Claw() {
 
-    grabbyMotor = new CANSparkMax(Constants.grabbymotorID, MotorType.kBrushless);
+    clawMotor = new CANSparkMax(Constants.clawMotorID, MotorType.kBrushless);
 
   }
 
   public void moveClaw(double speed) {
-    grabbyMotor.set(speed);
+    clawMotor.set(speed);
+  }
+
+  public double getEncoder(){
+    return clawMotor.getEncoder().getPosition();
+  }
+
+  public void resetEncoder() {
+    clawMotor.getEncoder().setPosition(0);
   }
 
   @Override

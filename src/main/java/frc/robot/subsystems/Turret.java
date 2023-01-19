@@ -13,37 +13,45 @@ import frc.robot.Constants;
 public class Turret extends SubsystemBase {
   /** Creates a new Turret. */
 
-  CANSparkMax turny;
+  CANSparkMax turretMotor;
 
   public Turret() {
 
     //the motor that turn the turret
-    turny = new CANSparkMax(Constants.turretmotorID, MotorType.kBrushless);
+    turretMotor = new CANSparkMax(Constants.turretmotorID, MotorType.kBrushless);
 
+  }
+
+  public double getTurretEncoder() {
+    return turretMotor.getEncoder().getPosition();
+  }
+
+  public void resetTurretEncoder() {
+    turretMotor.getEncoder().getPosition();
   }
 
   //a method to move the turret
   public void turnTurret(double speed) {
 
     //checks we are inside the turrets thresholds
-    if((turny.getEncoder().getPosition() < Constants.turretUpperThreshold) &&
-      (turny.getEncoder().getPosition() > Constants.turretLowerThreshold)) {
-      turny.set(speed);
+    if((turretMotor.getEncoder().getPosition() < Constants.turretUpperThreshold) &&
+      (turretMotor.getEncoder().getPosition() > Constants.turretLowerThreshold)) {
+      turretMotor.set(speed);
     }
 
       //checks if we past the lower threshold and if so are we correcting that 
-    else if((turny.getEncoder().getPosition() > Constants.turretLowerThreshold) && (speed > 0)){
-      turny.set(speed);
+    else if((turretMotor.getEncoder().getPosition() > Constants.turretLowerThreshold) && (speed > 0)){
+      turretMotor.set(speed);
     }
 
       //check if we past the upper threshold and if so are we correcting that
-    else if ((turny.getEncoder().getPosition() < Constants.turretUpperThreshold) && (speed < 0)) {
-      turny.set(speed);
+    else if ((turretMotor.getEncoder().getPosition() < Constants.turretUpperThreshold) && (speed < 0)) {
+      turretMotor.set(speed);
     }
 
       //stops the motor because we past a threshold and we're not trying to correct it
     else {
-      turny.set(0);
+      turretMotor.set(0);
     }
   }
 
