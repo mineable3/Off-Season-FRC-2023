@@ -37,5 +37,6 @@ public final class Constants {
     public static final int driveRight = 5;
 
     public static final int kDriverControllerPort = 0;
+    public static final int kAuxControllerPort = 1;
   }
 }
