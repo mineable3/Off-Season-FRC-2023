@@ -5,7 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.RobotContainer;
 
 public class ClawGrab extends CommandBase {
@@ -40,9 +40,9 @@ public class ClawGrab extends CommandBase {
       RobotContainer.m_Claw.moveClaw(-.5);
       isOpen = true;
     }
-    //waiting for the claw to finish opening or closing
-    new WaitCommand(1);
 
+    //waiting for the claw to finish opening or closing
+    Commands.waitSeconds(.2);
     //stops the claw in place
     RobotContainer.m_Claw.moveClaw(0);
     }
@@ -50,7 +50,9 @@ public class ClawGrab extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    RobotContainer.m_Claw.moveClaw(0);
+  }
 
   // Returns true when the command should end.
   @Override

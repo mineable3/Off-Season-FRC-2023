@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.SoftLimitDirection;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -20,7 +21,14 @@ public class Turret extends SubsystemBase {
     //the motor that turn the turret
     turretMotor = new CANSparkMax(Constants.turretmotorID, MotorType.kBrushless);
 
+    //setting limits
+    //CHANGE LIMITS WHEN THE ROBOT IS DONE, THE 10'S ARE JUST PLACE HOLDERS
+    turretMotor.setSoftLimit(SoftLimitDirection.kForward, 10);
+    turretMotor.setSoftLimit(SoftLimitDirection.kReverse, -10);
+    turretMotor.enableSoftLimit(SoftLimitDirection.kForward, true);
+    turretMotor.enableSoftLimit(SoftLimitDirection.kReverse, true);
   }
+
 
 
   //Encoder methods
@@ -33,27 +41,7 @@ public class Turret extends SubsystemBase {
 
   //a method to move the turret
   public void turnTurret(double speed) {
-
-    //checks we are inside the turrets thresholds
-    if((turretMotor.getEncoder().getPosition() < Constants.turretUpperThreshold) &&
-      (turretMotor.getEncoder().getPosition() > Constants.turretLowerThreshold)) {
-      turretMotor.set(speed);
-    }
-
-      //checks if we past the lower threshold and if so are we correcting that 
-    else if((turretMotor.getEncoder().getPosition() > Constants.turretLowerThreshold) && (speed > 0)){
-      turretMotor.set(speed);
-    }
-
-      //check if we past the upper threshold and if so are we correcting that
-    else if ((turretMotor.getEncoder().getPosition() < Constants.turretUpperThreshold) && (speed < 0)) {
-      turretMotor.set(speed);
-    }
-
-      //stops the motor because we past a threshold and we're not trying to correct it
-    else {
-      turretMotor.set(0);
-    }
+    turretMotor.set(speed);
   }
 
   @Override

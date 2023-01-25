@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.SoftLimitDirection;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -17,6 +18,16 @@ public class Claw extends SubsystemBase {
 
     //the motor that opens and shuts the claw
     clawMotor = new CANSparkMax(Constants.clawMotorID, MotorType.kBrushless);
+
+
+
+    //CHANGE LIMITS WHEN THE ROBOT IS DONE, THE 10'S ARE JUST PLACE HOLDERS
+    clawMotor.setSoftLimit(SoftLimitDirection.kForward, 10);
+    clawMotor.setSoftLimit(SoftLimitDirection.kForward, -10);
+    clawMotor.enableSoftLimit(SoftLimitDirection.kForward, true);
+    clawMotor.enableSoftLimit(SoftLimitDirection.kReverse, true);
+
+
 
   }
 

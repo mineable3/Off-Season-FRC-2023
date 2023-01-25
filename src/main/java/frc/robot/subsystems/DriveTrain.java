@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class DriveTrain extends SubsystemBase {
   /** Creates a new DriveTrain. */
 
-  private CANSparkMax leftmotor1, leftmotor2, rightmotor1, rightmotor2;
+  public CANSparkMax leftmotor1, leftmotor2, rightmotor1, rightmotor2;
   private MotorControllerGroup leftTrain, rightTrain;
   private DifferentialDrive differentialDrive;
   private Pigeon2 gyro;
@@ -54,6 +54,7 @@ public class DriveTrain extends SubsystemBase {
     return gyro.getPitch();
   }
   public void resetPitch() {
+    
   }
   public double getRoll() {
     return gyro.getRoll();
