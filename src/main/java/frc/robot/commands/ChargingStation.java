@@ -31,12 +31,12 @@ public class ChargingStation extends CommandBase {
     while (RobotContainer.m_DriveTrain.getPitch() > 5){
       System.out.println("inside while loop");
         RobotContainer.m_DriveTrain.arcadeDrive(.1, 0);
-       
     }
-      while ((RobotContainer.m_DriveTrain.getPitch() < -5)) {
-        System.out.println("inside other while loop");
-        RobotContainer.m_DriveTrain.arcadeDrive(-.1, 0);
-      }
+    
+    while ((RobotContainer.m_DriveTrain.getPitch() < -5)) {
+      System.out.println("inside other while loop");
+      RobotContainer.m_DriveTrain.arcadeDrive(-.1, 0);
+    }
   }
   
 
