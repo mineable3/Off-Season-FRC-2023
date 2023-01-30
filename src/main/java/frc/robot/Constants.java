@@ -30,8 +30,8 @@ public final class Constants {
     public static final int driveSpeed = 1;
     public static final int driveRotate = 4;
 
-    public static final int driveLeft = 1;
-    public static final int driveRight = 5;
+    public static final int driveLeft = 5;
+    public static final int driveRight = 1;
 
     public static final int kDriverControllerPort = 0;
     public static final int kAuxControllerPort = 1;

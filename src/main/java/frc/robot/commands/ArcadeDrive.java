@@ -34,14 +34,6 @@ public class ArcadeDrive extends CommandBase {
 
     RobotContainer.m_DriveTrain.arcadeDrive(speed, rotation);
 
-    
-    //Just testing if the method works without making an auto command
-    if (RobotContainer.m_driverController.a().getAsBoolean()) {
-      System.out.println(RobotContainer.m_DriveTrain.getPitch() + " pitch");
-    }
-    if (RobotContainer.m_driverController.b().getAsBoolean()) {
-      RobotContainer.m_DriveTrain.resetEncoders();
-    }
   }
 
   // Called once the command ends or is interrupted.

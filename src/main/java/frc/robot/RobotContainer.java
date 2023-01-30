@@ -12,6 +12,7 @@ import frc.robot.commands.Autos;
 import frc.robot.commands.ChargingStation;
 import frc.robot.commands.ClawGrab;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.TankDrive;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -47,7 +48,6 @@ public class RobotContainer {
     m_DriveTrain.setDefaultCommand(new ArcadeDrive());
     //m_DriveTrain.setDefaultCommand(new TankDrive());
     m_Turret.setDefaultCommand(new TurretSpin());
-    m_Claw.setDefaultCommand(new ClawGrab());
     configureBindings();
   }
 
@@ -66,11 +66,11 @@ public class RobotContainer {
         .onTrue(new ExampleCommand(m_exampleSubsystem));
 
 
-    m_auxController.b().whileTrue(new ClawGrab());
+    m_driverController.b().whileTrue(new ClawGrab());
 
-    // Schedule `ChargingStation` when the Xbox controller's B button is pressed,
+    // Schedule `ChargingStation` when the Xbox controller's X button is pressed,
     // cancelling on release.
-    m_driverController.x().whileTrue(new ChargingStation());
+    m_driverController.x().onTrue(new ChargingStation());
   }
 
   /**
