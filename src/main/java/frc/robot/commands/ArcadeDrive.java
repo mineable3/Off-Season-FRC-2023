@@ -40,6 +40,10 @@ public class ArcadeDrive extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     RobotContainer.m_DriveTrain.arcadeDrive(0, 0);
+
+    if (RobotContainer.m_driverController.b().getAsBoolean()) {
+      System.out.println(RobotContainer.m_DriveTrain.getPitch());
+    }
   }
 
   // Returns true when the command should end.
