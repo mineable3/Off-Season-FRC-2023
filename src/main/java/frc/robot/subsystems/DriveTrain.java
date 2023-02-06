@@ -10,7 +10,6 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import frc.robot.Constants;
-import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -22,7 +21,6 @@ public class DriveTrain extends SubsystemBase {
   private MotorControllerGroup leftTrain, rightTrain;
   private DifferentialDrive differentialDrive;
   private Pigeon2 gyro;
-  private PIDController pidController;
 
   //this is kayvon
 
@@ -43,8 +41,6 @@ public class DriveTrain extends SubsystemBase {
     rightTrain = new MotorControllerGroup(rightmotor1/* , rightmotor2*/);
     gyro = new Pigeon2(Constants.pigeonID);
     differentialDrive = new DifferentialDrive(leftTrain, rightTrain);
-    pidController = new PIDController(0.5, 0, 0);
-    pidController.calculate(getDriveEncoder());
 
     //inverting one side of the robot so we drive straight
     rightTrain.setInverted(true);
@@ -62,9 +58,10 @@ public class DriveTrain extends SubsystemBase {
     gyro.setYaw(0);
   }
   public double getPitch() {
-    return gyro.getPitch();
+    double pitch = (gyro.getPitch() % 360);
+    return pitch;
   }
-  public void resetPitch() {
+  public void resetPitch(){
     
   }
   public double getRoll() {
@@ -86,10 +83,10 @@ public class DriveTrain extends SubsystemBase {
   
   //Arcade drive command
   public void arcadeDrive(double speed, double rotation) {
-    //leftmotor1.setIdleMode(IdleMode.kCoast);
-    //leftmotor2.setIdleMode(IdleMode.kCoast);
-    //rightmotor1.setIdleMode(IdleMode.kCoast);
-    //rightmotor2.setIdleMode(IdleMode.kCoast);
+    leftmotor1.setIdleMode(IdleMode.kCoast);
+    leftmotor2.setIdleMode(IdleMode.kCoast);
+    rightmotor1.setIdleMode(IdleMode.kCoast);
+    rightmotor2.setIdleMode(IdleMode.kCoast);
 
     differentialDrive.arcadeDrive(speed, rotation);
   }

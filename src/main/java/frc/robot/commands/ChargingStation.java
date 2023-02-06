@@ -42,6 +42,9 @@ public class ChargingStation extends CommandBase {
       System.out.println("inside other while loop");
       RobotContainer.m_DriveTrain.arcadeDrive(-.5, 0);
     }*/
+    
+    RobotContainer.m_DriveTrain.leftmotor1.getPIDController().setP(.05);
+
     RobotContainer.m_DriveTrain.arcadeDrive(-.5, 0);
 
     if (

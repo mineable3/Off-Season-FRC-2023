@@ -13,6 +13,7 @@ import frc.robot.commands.ChargingStation;
 import frc.robot.commands.ClawGrab;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.TankDrive;
+import frc.robot.commands.TurnToAngle;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -66,7 +67,7 @@ public class RobotContainer {
         .onTrue(new ExampleCommand(m_exampleSubsystem));
 
 
-    m_driverController.b().whileTrue(new ClawGrab());
+    m_driverController.b().whileTrue(new TurnToAngle(180));
 
     // Schedule `ChargingStation` when the Xbox controller's X button is pressed,
     // cancelling on release.
