@@ -27,9 +27,6 @@ public class ClawGrab extends CommandBase {
   public void execute() {
 
 
-    // is the B button pressed
-    if (RobotContainer.m_auxController.b().getAsBoolean()){
-
     //if the claw is open the close it and change the isOpen variable
     if(isOpen) {
       RobotContainer.m_Claw.moveClaw(.5);
@@ -46,7 +43,7 @@ public class ClawGrab extends CommandBase {
     //stops the claw in place
     RobotContainer.m_Claw.moveClaw(0);
     }
-  }
+  
 
   // Called once the command ends or is interrupted.
   @Override

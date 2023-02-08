@@ -40,7 +40,7 @@ public class Turret extends SubsystemBase {
   }
 
   //a method to move the turret
-  public void turnTurret(double speed) {
+  public void setTurret(double speed) {
     turretMotor.set(speed);
   }
 

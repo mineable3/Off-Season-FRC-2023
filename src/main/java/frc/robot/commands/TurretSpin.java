@@ -4,15 +4,18 @@
 
 package frc.robot.commands;
 
+import java.util.function.Supplier;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
 public class TurretSpin extends CommandBase {
   /** Creates a new TurretSpin. */
-  public TurretSpin() {
+  Supplier<Double> turrentSpeed;
+  public TurretSpin(Supplier <Double> turSpeed) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.m_Turret);
+    turrentSpeed = turSpeed;
+
   }
 
   // Called when the command is initially scheduled.
@@ -23,19 +26,21 @@ public class TurretSpin extends CommandBase {
   @Override
   public void execute() {
     
-    double lTrigger = RobotContainer.m_driverController.getLeftTriggerAxis();
-    double rTrigger = RobotContainer.m_driverController.getRightTriggerAxis();
+    //double lTrigger = RobotContainer.m_driverController.getLeftTriggerAxis();
+    //double rTrigger = RobotContainer.m_driverController.getRightTriggerAxis();
 
-    lTrigger *= Constants.turretSpeedMultiplier;
-    rTrigger *= Constants.turretSpeedMultiplier;
+    //lTrigger *= Constants.turretSpeedMultiplier;
+    //rTrigger *= Constants.turretSpeedMultiplier;
 
-    RobotContainer.m_Turret.turnTurret((rTrigger - lTrigger));
+    //RobotContainer.m_Turret.turnTurret((rTrigger - lTrigger));
+   RobotContainer.m_Turret.setTurret(turrentSpeed.get());
+
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_Turret.turnTurret(0);
+    RobotContainer.m_Turret.setTurret(0);
   }
 
   // Returns true when the command should end.
