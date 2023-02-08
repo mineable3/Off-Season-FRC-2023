@@ -4,25 +4,34 @@
 
 package frc.robot.subsystems;
 
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Arm extends SubsystemBase {
+ public final CANSparkMax armMotor;
+
   /** Creates a new Arm. */
-  int armSpeed;
-  int x;
+  
   public Arm() {
-
+   armMotor = new CANSparkMax (Constants.armMotor,MotorType.kBrushless);
+   resetarmEncoder();
+   //the arm motor number limit will be a place holder for the time being
+   armMotor.setSoftLimit(SoftLimitDirection.kForward, 25);
+   armMotor.setSoftLimit(SoftLimitDirection.kReverse, 0);
+   armMotor.enableSoftLimit(SoftLimitDirection.kForward,true);
+   armMotor.enableSoftLimit(SoftLimitDirection.kReverse, true);
+   
   }
-
-
-  Arm(int speed){
-//this will come as incorrect 0]
-
-     //int armSpeed = x <= 50;
-
-  }
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+public void setArm (double speed){
+  armMotor.set(speed);
+}
+public double getArmPosition(){
+  armMotor.getEncoder().setPosition();
+}
+public void resetArmEncoder(){
+  return armMotor.getEncoder().setPositon(0);
+}
+public void stopArm(){
+  armMotor.set(0);
+}
 }

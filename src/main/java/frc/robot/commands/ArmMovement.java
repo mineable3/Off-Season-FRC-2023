@@ -9,18 +9,19 @@ import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
 public class ArmMovement extends CommandBase {
+boolean forward;
+boolean backward;
   /** Creates a new ArmMovement. */
   public ArmMovement() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.m_DriveTrain);
+    addRequirements(RobotContainer.m_armMotor);
+
   }
-  boolean left;
-  boolean right;
+ 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-  boolean left = true;
-  boolean right = true;
+    
   
   }
  
@@ -30,12 +31,13 @@ public class ArmMovement extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
 
-  //int armSpeed;
+  
   
   public void execute() {
-    if(left){
-  //armSpeed *= Constants.armSpeedMultiplier;
-    }
+//use .getRawAxis
+    
+
+
   }
 
   // Called once the command ends or is interrupted.
