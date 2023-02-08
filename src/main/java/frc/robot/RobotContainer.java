@@ -64,6 +64,7 @@ public class RobotContainer {
 
     m_driverController.b().whileTrue(new TurnToAngle(0));
     m_driverController.x().onTrue(new ClawGrab());
+    m_driverController.a().whileTrue(new PIDChargingStation());
     m_driverController.rightTrigger().onTrue(new TurretSpin(() -> (m_driverController.getRightTriggerAxis())));
     m_driverController.leftTrigger().onTrue(new TurretSpin(() -> (m_driverController.getLeftTriggerAxis())));
   }
