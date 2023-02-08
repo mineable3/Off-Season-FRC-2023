@@ -13,12 +13,11 @@ import frc.robot.RobotContainer;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class PIDChargingStation extends PIDCommand {
   /** Creates a new PIDChargingStation. */
-  static boolean isLevel;
   
   public PIDChargingStation() {
     super(
         // The controller that the command will use
-        new PIDController(.2, 0, 0),
+        new PIDController(1, 0, 0),
         // This should return the measurement
         () -> RobotContainer.m_DriveTrain.getPitch(),
         // This should return the setpoint (can also be a constant)
@@ -26,7 +25,6 @@ public class PIDChargingStation extends PIDCommand {
         // This uses the output
         output -> {
           RobotContainer.m_DriveTrain.arcadeDrive(output, 0);
-          isLevel = (-5 < RobotContainer.m_DriveTrain.getPitch()) && (RobotContainer.m_DriveTrain.getPitch() < 5);
           // Use the output here
         });
     // Use addRequirements() here to declare subsystem dependencies.
@@ -38,6 +36,6 @@ public class PIDChargingStation extends PIDCommand {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return isLevel;
+    return getController().atSetpoint();
   }
 }

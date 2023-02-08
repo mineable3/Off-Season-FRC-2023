@@ -19,16 +19,13 @@ public class Claw extends SubsystemBase {
     //the motor that opens and shuts the claw
     clawMotor = new CANSparkMax(Constants.clawMotorID, MotorType.kBrushless);
 
-
-
     //CHANGE LIMITS WHEN THE ROBOT IS DONE, THE 10'S ARE JUST PLACE HOLDERS
     clawMotor.setSoftLimit(SoftLimitDirection.kForward, 10);
     clawMotor.setSoftLimit(SoftLimitDirection.kForward, -10);
     clawMotor.enableSoftLimit(SoftLimitDirection.kForward, true);
     clawMotor.enableSoftLimit(SoftLimitDirection.kReverse, true);
 
-
-
+    resetEncoder();
   }
 
   public void moveClaw(double speed) {
