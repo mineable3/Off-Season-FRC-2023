@@ -23,6 +23,7 @@ public final class Constants {
   public static final int pigeonID = 0;
   public static final double driveSpeedMultiplier = .8;
   public static final double turretSpeedMultiplier = .2;
+  public static final double armSpeedMultiplier = .5;
 
   public static class OperatorConstants {
 
