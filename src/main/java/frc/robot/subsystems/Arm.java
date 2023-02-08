@@ -18,7 +18,7 @@ public class Arm extends SubsystemBase {
   Arm(int speed){
 //this will come as incorrect 0]
 
-     int armSpeed = x <= 50;
+     //int armSpeed = x <= 50;
 
   }
   @Override

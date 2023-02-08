@@ -30,11 +30,11 @@ public class ArmMovement extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
 
-  int armSpeed;
+  //int armSpeed;
   
   public void execute() {
     if(left){
-  armSpeed *= Constants.armSpeedMultiplier;
+  //armSpeed *= Constants.armSpeedMultiplier;
     }
   }
 
