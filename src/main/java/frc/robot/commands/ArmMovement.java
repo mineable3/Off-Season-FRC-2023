@@ -14,7 +14,7 @@ boolean backward;
   /** Creates a new ArmMovement. */
   public ArmMovement() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.m_armMotor);
+    addRequirements(RobotContainer.m_Arm);
 
   }
  
@@ -25,6 +25,7 @@ boolean backward;
   
   }
  
+  
 
 
        
