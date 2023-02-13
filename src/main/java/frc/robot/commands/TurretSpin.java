@@ -10,8 +10,8 @@ import frc.robot.RobotContainer;
 
 public class TurretSpin extends CommandBase {
   /** Creates a new TurretSpin. */
-  Supplier<Double> turrentSpeed;
-  public TurretSpin(Supplier <Double> turSpeed) {
+  double turrentSpeed;
+  public TurretSpin(double turSpeed) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.m_Turret);
     turrentSpeed = turSpeed;
@@ -33,7 +33,7 @@ public class TurretSpin extends CommandBase {
     //rTrigger *= Constants.turretSpeedMultiplier;
 
     //RobotContainer.m_Turret.turnTurret((rTrigger - lTrigger));
-   RobotContainer.m_Turret.setTurret(turrentSpeed.get());
+   RobotContainer.m_Turret.setTurret(turrentSpeed);
 
   }
 

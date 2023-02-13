@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.sensors.Pigeon2;
 import com.ctre.phoenix.sensors.Pigeon2.AxisDirection;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -21,7 +22,7 @@ public class DriveTrain extends SubsystemBase {
   private DifferentialDrive differentialDrive;
   private Pigeon2 gyro;
 
-  
+  //this is kayvon
 
   
 
@@ -61,7 +62,7 @@ public class DriveTrain extends SubsystemBase {
     return pitch;
   }
   public void resetPitch(){
-    
+    gyro.configMountPoseRoll(getRoll());
   }
   public double getRoll() {
     return gyro.getRoll();
@@ -82,11 +83,6 @@ public class DriveTrain extends SubsystemBase {
   
   //Arcade drive command
   public void arcadeDrive(double speed, double rotation) {
-    leftmotor1.setIdleMode(IdleMode.kCoast);
-    leftmotor2.setIdleMode(IdleMode.kCoast);
-    rightmotor1.setIdleMode(IdleMode.kCoast);
-    rightmotor2.setIdleMode(IdleMode.kCoast);
-
     differentialDrive.arcadeDrive(speed, rotation);
   }
   //tank drive command
