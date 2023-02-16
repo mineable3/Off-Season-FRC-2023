@@ -10,6 +10,7 @@ import frc.robot.commands.TurretSpin;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ClawGrab;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.LEDColorChange;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.DriveTrain;
@@ -66,10 +67,16 @@ public class RobotContainer {
 
 
     m_driverController.b().whileTrue(new TurnToAngle(0));
-    m_auxController.a().onTrue(new ClawGrab());
     m_driverController.a().whileTrue(new PIDChargingStation());
-    m_auxController.rightTrigger().onTrue(new TurretSpin(() -> (m_driverController.getRightTriggerAxis())));
-    m_auxController.leftTrigger().onTrue(new TurretSpin(() -> (m_driverController.getLeftTriggerAxis())));
+
+    /*aux will also 
+    rightJoystick: arm
+    leftJoystick: claw turret
+    */
+    m_auxController.rightTrigger().onTrue(new TurretSpin(m_driverController.getRightTriggerAxis()));
+    m_auxController.leftTrigger().onTrue(new TurretSpin(m_driverController.getLeftTriggerAxis()));
+    m_auxController.x().onTrue(new LEDColorChange());
+    m_auxController.a().onTrue(new ClawGrab());
   }
 
   /**
