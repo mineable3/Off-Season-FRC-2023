@@ -4,8 +4,12 @@
 
 package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.SoftLimitDirection;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class Arm extends SubsystemBase {
  public final CANSparkMax armMotor;
@@ -13,9 +17,9 @@ public class Arm extends SubsystemBase {
   /** Creates a new Arm. */
   
   public Arm() {
-   armMotor = new CANSparkMax (Constants.armMotor,MotorType.kBrushless);
-   resetarmEncoder();
-   //the arm motor number limit will be a place holder for the time being
+   armMotor = new CANSparkMax(Constants.armMotorID, MotorType.kBrushless);
+   resetArmEncoder();
+   //the arm motor number limit will be a place holder for the time beingj
    armMotor.setSoftLimit(SoftLimitDirection.kForward, 25);
    armMotor.setSoftLimit(SoftLimitDirection.kReverse, 0);
    armMotor.enableSoftLimit(SoftLimitDirection.kForward,true);
@@ -26,10 +30,11 @@ public void setArm (double speed){
   armMotor.set(speed);
 }
 public double getArmPosition(){
-  armMotor.getEncoder().setPosition();
+  return armMotor.getEncoder().getPosition();
+ 
 }
 public void resetArmEncoder(){
-  return armMotor.getEncoder().setPositon(0);
+  armMotor.getEncoder().setPosition(0);
 }
 public void stopArm(){
   armMotor.set(0);
