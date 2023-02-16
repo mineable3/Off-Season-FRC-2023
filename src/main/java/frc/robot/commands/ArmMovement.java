@@ -20,7 +20,7 @@ public class ArmMovement extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    
+  RobotContainer.m_arm.resetArmEncoder();
   
   }
  
@@ -35,7 +35,10 @@ public class ArmMovement extends CommandBase {
   
   public void execute() {
 //use .getRawAxis
-    
+double speed = RobotContainer.m_driverController.getRightX();
+
+RobotContainer.m_arm.setArm(speed);
+
 
 
   }

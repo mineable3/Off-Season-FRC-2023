@@ -34,6 +34,7 @@ public double getArmPosition(){
  
 }
 public void resetArmEncoder(){
+  
   armMotor.getEncoder().setPosition(0);
 }
 public void stopArm(){
