@@ -8,6 +8,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.RobotContainer;
 
+/*
+ * DON'T WORK ON THIS!!!
+ * until we figure out which motor we are using
+ * and which motor controller
+ * i think talon has a built in one
+ */
+
 public class ClawGrab extends CommandBase {
   /** Creates a new ClawGrab. */
   boolean isOpen;

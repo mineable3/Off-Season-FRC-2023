@@ -10,6 +10,7 @@ import frc.robot.commands.TurretSpin;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ClawGrab;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.GamePieceTraking;
 import frc.robot.commands.LEDColorChange;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.DriveTrain;
@@ -18,6 +19,10 @@ import frc.robot.subsystems.Turret;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -31,6 +36,7 @@ public class RobotContainer {
   public final static DriveTrain m_DriveTrain = new DriveTrain();
   public final static Turret m_Turret = new Turret();
   public final static Claw m_Claw = new Claw();
+  public double x;
   
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
@@ -46,6 +52,7 @@ public class RobotContainer {
     m_DriveTrain.setDefaultCommand(new ArcadeDrive());
     //m_DriveTrain.setDefaultCommand(new TankDrive());
     configureBindings();
+    configureNetworkTables();
   }
 
   /**
@@ -74,6 +81,16 @@ public class RobotContainer {
     m_auxController.leftTrigger().onTrue(new TurretSpin(m_driverController.getLeftTriggerAxis()));
     m_auxController.x().onTrue(new LEDColorChange());
     m_auxController.a().onTrue(new ClawGrab());
+    m_auxController.y().whileTrue(new GamePieceTraking(x));
+  }
+
+  private void configureNetworkTables(){
+    //NetworkTableInstance defaultInst = NetworkTableInstance.getDefault();
+    //NetworkTable lime = defaultInst.getTable("limelight");
+
+    NetworkTable lime = NetworkTableInstance.getDefault().getTable("limelight");
+    NetworkTableEntry tx = lime.getEntry("tx");
+    x = tx.getDouble(0);
   }
 
   /**
