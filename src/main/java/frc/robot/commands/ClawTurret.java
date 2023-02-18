@@ -6,40 +6,34 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
-
-public class TurretSpin extends CommandBase {
-  /** Creates a new TurretSpin. */
-  double turrentSpeed;
-  public TurretSpin(double turSpeed) {
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
+public class ClawTurret extends CommandBase {
+  /** Creates a new ClawTurret. */
+  public ClawTurret() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.m_Turret);
-    turrentSpeed = turSpeed;
-
+   addRequirements(RobotContainer.m_clawTurret);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    RobotContainer.m_clawTurret.resetclawTurret();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
-    //double lTrigger = RobotContainer.m_driverController.getLeftTriggerAxis();
-    //double rTrigger = RobotContainer.m_driverController.getRightTriggerAxis();
 
-    //lTrigger *= Constants.turretSpeedMultiplier;
-    //rTrigger *= Constants.turretSpeedMultiplier;
+   double speed = RobotContainer.m_clawTurret.rightJoystick();
 
-    //RobotContainer.m_Turret.turnTurret((rTrigger - lTrigger));
-   RobotContainer.m_Turret.setTurret(turrentSpeed);
-
+   RobotContainer.m_clawTurret.setclawTurret(speed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_Turret.setTurret(0);
+    RobotContainer.m_clawTurret.setclawTurret(speed:0);
   }
 
   // Returns true when the command should end.

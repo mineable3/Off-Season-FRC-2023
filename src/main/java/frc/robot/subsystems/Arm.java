@@ -3,11 +3,11 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
-
-
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.SoftLimitDirection;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -17,14 +17,15 @@ public class Arm extends SubsystemBase {
   /** Creates a new Arm. */
   
   public Arm() {
-    
-   armMotor = new CANSparkMax (Constants.armMotor, MotorType.kBrushless);
-   resetArmEncoder();
-   //the arm motor number limit will be a place holder for the time being
+   armMotor = new CANSparkMax(Constants.armMotorID, MotorType.kBrushless);
+  
+   //the arm motor number limit will be a place holder for the time beingj
    armMotor.setSoftLimit(SoftLimitDirection.kForward, 25);
    armMotor.setSoftLimit(SoftLimitDirection.kReverse, 0);
    armMotor.enableSoftLimit(SoftLimitDirection.kForward,true);
    armMotor.enableSoftLimit(SoftLimitDirection.kReverse, true);
+
+   resetArmEncoder();
    
   }
 public void setArm (double speed){
@@ -32,8 +33,10 @@ public void setArm (double speed){
 }
 public double getArmPosition(){
   return armMotor.getEncoder().getPosition();
+ 
 }
 public void resetArmEncoder(){
+  
   armMotor.getEncoder().setPosition(0);
 }
 public void stopArm(){
