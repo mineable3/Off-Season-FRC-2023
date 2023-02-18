@@ -28,9 +28,9 @@ public class GamePieceTraking extends CommandBase {
   @Override
   public void execute() {
 
-    offSet /= 29.8;//how far away from the crosshair the target is in percent
 
-    if (Math.abs(offSet) >= .03){
+    //offSet is out of -29.8 to 29.8
+    if (Math.abs(offSet) >= 3){
 
       if(offSet > 0) {
         RobotContainer.m_Turret.setTurret(.3);

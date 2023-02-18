@@ -23,8 +23,11 @@ import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import java.util.EnumSet;
+import java.util.concurrent.atomic.AtomicReference;
+import edu.wpi.first.networktables.DoubleTopic;
 import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableEvent;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
 /**
@@ -39,30 +42,29 @@ public class RobotContainer {
   public final static DriveTrain m_DriveTrain = new DriveTrain();
   public final static Turret m_Turret = new Turret();
   public final static Claw m_Claw = new Claw();
-<<<<<<< HEAD
-  public double x;
-=======
-  public final static Arm m_arm = new Arm();
-  public final static ClawTurret m_clawTurret = new ClawTurret();
->>>>>>> 16761a5f56573cbe02b108a5eed13cae8e7d2068
-  
 
-  // Replace with CommandPS4Controller or CommandJoystick if needed
+  private AtomicReference<Double> tx = new AtomicReference<Double>();
+  private DoubleTopic dlbTopic_tx;
+  public double txHandle;
+  
   public static final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
-
   public static final CommandXboxController m_auxController =
       new CommandXboxController(OperatorConstants.kAuxControllerPort);
 
+
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    // Configure the trigger bindings
-    m_DriveTrain.setDefaultCommand(new ArcadeDrive());
-    //m_DriveTrain.setDefaultCommand(new TankDrive());
-    
+    // Configure the trigger bindings    
     configureBindings();
     configureNetworkTables();
   }
+
+
+
+
+
 
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
@@ -78,9 +80,11 @@ public class RobotContainer {
     new Trigger(m_exampleSubsystem::exampleCondition)
         .onTrue(new ExampleCommand(m_exampleSubsystem));
 
-
+    m_DriveTrain.setDefaultCommand(new ArcadeDrive());
+    //m_DriveTrain.setDefaultCommand(new TankDrive());
     m_driverController.b().whileTrue(new TurnToAngle(0));
     m_driverController.a().whileTrue(new PIDChargingStation());
+    
 
     /*aux will also 
     rightJoystick: arm
@@ -90,17 +94,33 @@ public class RobotContainer {
     m_auxController.leftTrigger().onTrue(new TurretSpin(m_driverController.getLeftTriggerAxis()));
     m_auxController.x().onTrue(new LEDColorChange());
     m_auxController.a().onTrue(new ClawGrab());
-    m_auxController.y().whileTrue(new GamePieceTraking(x));
+    m_auxController.y().whileTrue(new GamePieceTraking(txHandle));
   }
+
+
+
 
   private void configureNetworkTables(){
-    //NetworkTableInstance defaultInst = NetworkTableInstance.getDefault();
-    //NetworkTable lime = defaultInst.getTable("limelight");
+    NetworkTableInstance defaultNTinst = NetworkTableInstance.getDefault();
+    NetworkTable lime = defaultNTinst.getTable("limelight");
 
-    NetworkTable lime = NetworkTableInstance.getDefault().getTable("limelight");
-    NetworkTableEntry tx = lime.getEntry("tx");
-    x = tx.getDouble(0);
+    //NetworkTable lime = NetworkTableInstance.getDefault().getTable("limelight");
+    //NetworkTableEntry tx = lime.getEntry("tx");
+
+    dlbTopic_tx = lime.getDoubleTopic("tx");
+
+    txHandle = defaultNTinst.addListener(
+      dlbTopic_tx, 
+      EnumSet.of(NetworkTableEvent.Kind.kValueAll), 
+      event -> {
+        tx.set(event.valueData.value.getDouble());
+      }
+    );
+    //x = tx.getDouble(0);
   }
+
+
+
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
