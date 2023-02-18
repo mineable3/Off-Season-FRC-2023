@@ -18,12 +18,14 @@ public class Arm extends SubsystemBase {
   
   public Arm() {
    armMotor = new CANSparkMax(Constants.armMotorID, MotorType.kBrushless);
-   resetArmEncoder();
+  
    //the arm motor number limit will be a place holder for the time beingj
    armMotor.setSoftLimit(SoftLimitDirection.kForward, 25);
    armMotor.setSoftLimit(SoftLimitDirection.kReverse, 0);
    armMotor.enableSoftLimit(SoftLimitDirection.kForward,true);
    armMotor.enableSoftLimit(SoftLimitDirection.kReverse, true);
+
+   resetArmEncoder();
    
   }
 public void setArm (double speed){
