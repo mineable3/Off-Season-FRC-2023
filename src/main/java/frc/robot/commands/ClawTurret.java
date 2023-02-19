@@ -3,7 +3,6 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import edu.wpi.first.wpilibj.XboxController;
@@ -15,10 +14,16 @@ public class ClawTurret extends CommandBase {
    addRequirements(RobotContainer.m_clawTurret);
   }
 
+  private void addRequirements(ClawTurret mClawturret) {
+  }
+
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     RobotContainer.m_clawTurret.resetclawTurret();
+  }
+
+  private void resetclawTurret() {
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -30,10 +35,20 @@ public class ClawTurret extends CommandBase {
    RobotContainer.m_clawTurret.setclawTurret(speed);
   }
 
+  private double rightJoystick() {
+    return 0;
+  }
+
+  private void setclawTurret(double speed) {
+  }
+
   // Called once the command ends or is interrupted.
+ 
+
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_clawTurret.setclawTurret(speed:0);
+    double speed = RobotContainer.m_clawTurret.rightJoystick();
+    RobotContainer.m_clawTurret.setclawTurret(speed);
   }
 
   // Returns true when the command should end.
