@@ -7,12 +7,12 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
-public class GamePieceTraking extends CommandBase {
+public class GamePieceTracking extends CommandBase {
   /** Creates a new GamePieceTraking. */
 
   double offSet;
 
-  public GamePieceTraking(double inOffSet) {
+  public GamePieceTracking(double inOffSet) {
     // Use addRequirements() here to declare subsystem dependencies.
     offSet = inOffSet;
     addRequirements(RobotContainer.m_Turret);
@@ -27,6 +27,8 @@ public class GamePieceTraking extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
+    System.out.println(offSet);
 
 
     //offSet is out of -29.8 to 29.8
