@@ -7,12 +7,12 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
-public class GamePieceTracking extends CommandBase {
+public class GamePieceTraking extends CommandBase {
   /** Creates a new GamePieceTraking. */
 
   double offSet;
 
-  public GamePieceTracking(double inOffSet) {
+  public GamePieceTraking(double inOffSet) {
     // Use addRequirements() here to declare subsystem dependencies.
     offSet = inOffSet;
     addRequirements(RobotContainer.m_Turret);
