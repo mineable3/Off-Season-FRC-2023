@@ -25,7 +25,7 @@ public final class Constants {
   public static final int clawTurretID = 7;
   public static final double driveSpeedMultiplier = .8;
   public static final double turretSpeedMultiplier = .2;
-  public static final double driveTrainGearRatio = 16;//16 is a placeholder
+  public static final double driveTrainGearRatio = 15.87;
   
 
 

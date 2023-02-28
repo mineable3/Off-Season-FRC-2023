@@ -115,7 +115,6 @@ public class RobotContainer {
         tx.set(event.valueData.value.getDouble());
       }
     );
-    //x = tx.getDouble(0);
   }
 
 
