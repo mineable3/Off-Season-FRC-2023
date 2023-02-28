@@ -42,10 +42,15 @@ public class RobotContainer {
   public final static DriveTrain m_DriveTrain = new DriveTrain();
   public final static Turret m_Turret = new Turret();
   public final static Claw m_Claw = new Claw();
+  public final static ClawTurret m_clawTurret = new ClawTurret();
 
   private AtomicReference<Double> tx = new AtomicReference<Double>();
+  private AtomicReference<Double> tid = new AtomicReference<Double>();
   private DoubleTopic dlbTopic_tx;
+  private DoubleTopic dlbTopic_tid;
   public double txHandle;
+  public double tidHandle;  
+
   
   public static final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
@@ -110,14 +115,22 @@ public class RobotContainer {
     dlbTopic_tx = lime.getDoubleTopic("tx");
 
     txHandle = defaultNTinst.addListener(
-      dlbTopic_tx, 
-      EnumSet.of(NetworkTableEvent.Kind.kValueAll), 
+      dlbTopic_tx,EnumSet.of(NetworkTableEvent.Kind.kValueAll), 
       event -> {
         tx.set(event.valueData.value.getDouble());
       }
     );
     //x = tx.getDouble(0);
+    NetworkTableInstance defualtNTinst = NetworkTableInstance.getDefault();
+    NetworkTable AprilTag = defaultNTinst.getTable("tid");
+
+     dlbTopic_tid = AprilTag.getDoubleTopic("tid");
+
+    
+
+
   }
+
 
 
 
