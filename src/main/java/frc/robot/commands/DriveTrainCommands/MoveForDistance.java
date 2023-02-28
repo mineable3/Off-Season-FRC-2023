@@ -2,59 +2,45 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.DriveTrainCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
-public class GamePieceTraking extends CommandBase {
-  /** Creates a new GamePieceTraking. */
 
-  double offSet;
+public class MoveForDistance extends CommandBase {
+  /** Creates a new MoveForDistance. */
 
-  public GamePieceTraking(double inOffSet) {
+  double distance;
+
+  public MoveForDistance(double distanceInFeet) {
     // Use addRequirements() here to declare subsystem dependencies.
-    offSet = inOffSet;
-    addRequirements(RobotContainer.m_Turret);
+    distance = distanceInFeet;
+    addRequirements(RobotContainer.m_DriveTrain);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.m_Turret.resetTurretEncoder();
+    RobotContainer.m_DriveTrain.resetEncoders();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
-    System.out.println(offSet);
-
-
-    //offSet is out of -29.8 to 29.8
-    if (Math.abs(offSet) >= 3){
-
-      if(offSet > 0) {
-        RobotContainer.m_Turret.setTurret(.3);
-      }
-      else if(offSet < 0) {
-        RobotContainer.m_Turret.setTurret(-.3);
-      }
-      else {
-        RobotContainer.m_Turret.setTurret(0);
-      }
-    }
+    System.out.println("" + RobotContainer.m_DriveTrain.getDriveEncoders());
+    RobotContainer.m_DriveTrain.arcadeDrive(.5, 0);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_Turret.setTurret(0);
+    RobotContainer.m_DriveTrain.arcadeDrive(0, 0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return (((RobotContainer.m_DriveTrain.getDriveEncoders() * (Math.PI * 12)/*circumference of the wheel*/) / 12/*inches to feet*/) >= distance);
   }
 }

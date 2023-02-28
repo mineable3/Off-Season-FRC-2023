@@ -43,7 +43,7 @@ public class DriveTrain extends SubsystemBase {
 
     //inverting one side of the robot so we drive straight
     rightTrain.setInverted(true);
-
+    setEncoderConversionFactor(Constants.driveTrainGearRatio);
     gyro.configMountPose(AxisDirection.NegativeY, AxisDirection.PositiveZ);
 
   }
@@ -69,9 +69,26 @@ public class DriveTrain extends SubsystemBase {
 
 
   //drive train commands/methods
-  public double getDriveEncoder(){
-    return leftmotor1.getEncoder().getPosition();
+  public double getDriveEncoders(){
+    double encoders;
+
+    encoders = leftmotor1.getEncoder().getPosition() +
+    leftmotor2.getEncoder().getPosition() +
+    rightmotor1.getEncoder().getPosition() +
+    rightmotor2.getEncoder().getPosition();
+
+    encoders /= 4;
+
+    return encoders;
   }
+  private void setEncoderConversionFactor(double conversionFactor) {
+    leftmotor1.getEncoder().setPositionConversionFactor(conversionFactor);
+    leftmotor2.getEncoder().setPositionConversionFactor(conversionFactor);
+    rightmotor1.getEncoder().setPositionConversionFactor(conversionFactor);
+    rightmotor2.getEncoder().setPositionConversionFactor(conversionFactor);
+
+  }
+
   public void resetEncoders(){
     leftmotor1.getEncoder().setPosition(0);
     //leftmotor2.getEncoder().setPosition(0);
