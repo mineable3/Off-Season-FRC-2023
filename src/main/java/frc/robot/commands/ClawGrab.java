@@ -4,20 +4,17 @@
 
 package frc.robot.commands;
 
+import com.revrobotics.CANSparkMax.IdleMode;
+
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.RobotContainer;
 
-/*
- * DON'T WORK ON THIS!!!
- * until we figure out which motor we are using
- * and which motor controller
- * i think talon has a built in one
- */
 
 public class ClawGrab extends CommandBase {
   /** Creates a new ClawGrab. */
-  boolean isOpen;
+  boolean isOpen = true;;
+
   public ClawGrab() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.m_Claw);
@@ -26,7 +23,7 @@ public class ClawGrab extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    isOpen = true;
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -34,19 +31,19 @@ public class ClawGrab extends CommandBase {
   public void execute() {
 
 
-    //if the claw is open the close it and change the isOpen variable
+    //if the claw is open the close it
     if(isOpen) {
       RobotContainer.m_Claw.moveClaw(.5);
-      isOpen = false;
 
-    //if the claw is closed then open it and change the isOpen variable
+
+    //if the claw is closed then open it
     } else {
       RobotContainer.m_Claw.moveClaw(-.5);
-      isOpen = true;
     }
 
     //waiting for the claw to finish opening or closing
-    Commands.waitSeconds(.2);
+    Timer.delay(0.3);
+
     //stops the claw in place
     RobotContainer.m_Claw.moveClaw(0);
     }
@@ -55,7 +52,18 @@ public class ClawGrab extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+
     RobotContainer.m_Claw.moveClaw(0);
+
+    RobotContainer.m_Claw.clawMotor.setIdleMode(IdleMode.kBrake);
+    
+    if(isOpen) {
+      isOpen = false;
+    }
+
+    else {
+      isOpen = true;
+    }
   }
 
   // Returns true when the command should end.

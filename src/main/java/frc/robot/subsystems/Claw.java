@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Claw extends SubsystemBase {
   /** Creates a new Claw. */
-  CANSparkMax clawMotor;
+  public CANSparkMax clawMotor;
 
   public Claw() {
 
