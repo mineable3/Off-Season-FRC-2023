@@ -4,15 +4,17 @@
 
 package frc.robot.commands;
 
+import java.util.concurrent.atomic.AtomicReference;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
 public class GamePieceTraking extends CommandBase {
   /** Creates a new GamePieceTraking. */
 
-  double offSet;
+  AtomicReference<Double> offSet;
 
-  public GamePieceTraking(double inOffSet) {
+  public GamePieceTraking(AtomicReference<Double> inOffSet) {
     // Use addRequirements() here to declare subsystem dependencies.
     offSet = inOffSet;
     addRequirements(RobotContainer.m_Turret);
@@ -32,12 +34,12 @@ public class GamePieceTraking extends CommandBase {
 
 
     //offSet is out of -29.8 to 29.8
-    if (Math.abs(offSet) >= 3){
+    if (Math.abs(offSet.get()) >= 3){
 
-      if(offSet > 0) {
+      if(offSet.get() > 0) {
         RobotContainer.m_Turret.setTurret(.3);
       }
-      else if(offSet < 0) {
+      else if(offSet.get() < 0) {
         RobotContainer.m_Turret.setTurret(-.3);
       }
       else {

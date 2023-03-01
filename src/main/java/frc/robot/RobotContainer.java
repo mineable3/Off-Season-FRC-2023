@@ -93,7 +93,7 @@ public class RobotContainer {
     m_auxController.leftTrigger().onTrue(new TurretSpin(m_driverController.getLeftTriggerAxis()));
     m_auxController.x().onTrue(new LEDColorChange());
     m_auxController.a().onTrue(new ClawGrab());
-    m_auxController.y().whileTrue(new GamePieceTraking(txHandle));
+    m_auxController.y().whileTrue(new GamePieceTraking(tx));
   }
 
 

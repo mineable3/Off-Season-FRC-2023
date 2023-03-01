@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMax.SoftLimitDirection;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -14,34 +15,56 @@ import frc.robot.Constants;
 public class Turret extends SubsystemBase {
   /** Creates a new Turret. */
 
-  CANSparkMax turretMotor;
+  CANSparkMax turretMotorLeft;
+  CANSparkMax turretMotorRight;
 
   public Turret() {
 
     //the motor that turn the turret
-    turretMotor = new CANSparkMax(Constants.turretmotorID, MotorType.kBrushless);
+    turretMotorLeft = new CANSparkMax(Constants.turretmotorID, MotorType.kBrushless);
+    turretMotorRight = new CANSparkMax(Constants.turretmotorID, MotorType.kBrushless);
 
     //setting limits
     //CHANGE LIMITS WHEN THE ROBOT IS DONE, THE 10'S ARE JUST PLACE HOLDERS
-    turretMotor.setSoftLimit(SoftLimitDirection.kForward, 10);
-    turretMotor.setSoftLimit(SoftLimitDirection.kReverse, -10);
-    turretMotor.enableSoftLimit(SoftLimitDirection.kForward, true);
-    turretMotor.enableSoftLimit(SoftLimitDirection.kReverse, true);
+    turretMotorLeft.setSoftLimit(SoftLimitDirection.kForward, 10);
+    turretMotorLeft.setSoftLimit(SoftLimitDirection.kReverse, -10);
+    turretMotorLeft.enableSoftLimit(SoftLimitDirection.kForward, true);
+    turretMotorLeft.enableSoftLimit(SoftLimitDirection.kReverse, true);
+
+    turretMotorRight.setSoftLimit(SoftLimitDirection.kForward, 10);
+    turretMotorRight.setSoftLimit(SoftLimitDirection.kReverse, -10);
+    turretMotorRight.enableSoftLimit(SoftLimitDirection.kForward, true);
+    turretMotorRight.enableSoftLimit(SoftLimitDirection.kReverse, true);
   }
 
 
 
   //Encoder methods
   public double getTurretEncoder() {
-    return turretMotor.getEncoder().getPosition();
+    
+    double averageEncoder = turretMotorLeft.getEncoder().getPosition() + turretMotorRight.getEncoder().getPosition();
+    averageEncoder /= 2;
+    return averageEncoder;
   }
+
   public void resetTurretEncoder() {
-    turretMotor.getEncoder().getPosition();
+    turretMotorLeft.getEncoder().getPosition();
+    turretMotorRight.getEncoder().getPosition();
   }
 
   //a method to move the turret
   public void setTurret(double speed) {
-    turretMotor.set(speed);
+
+    //if the turret spins one direction then coast one motor and run the other
+    if(speed > 0) {
+    turretMotorLeft.set(speed);
+    turretMotorRight.setIdleMode(IdleMode.kCoast);
+    }
+    //same thing as before, but the opposite motor
+    else if (speed < 0) {
+    turretMotorRight.set(speed);
+    turretMotorLeft.setIdleMode(IdleMode.kCoast);
+    }
   }
 
   @Override
