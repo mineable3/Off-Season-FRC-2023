@@ -48,8 +48,8 @@ public class Turret extends SubsystemBase {
   }
 
   public void resetTurretEncoder() {
-    turretMotorLeft.getEncoder().getPosition();
-    turretMotorRight.getEncoder().getPosition();
+    turretMotorLeft.getEncoder().setPosition(0);
+    turretMotorRight.getEncoder().setPosition(0);
   }
 
   //a method to move the turret

@@ -21,7 +21,9 @@ public final class Constants {
   public static final int turretmotorID = 9;
   public static final int clawMotorID = 6;
   public static final int pigeonID = 0;
-  public static final int armMotorID = 1;
+  public static final int armExtendMotorID = 8;
+  public static final int armHeightMotor1ID = 9;
+  public static final int armHeightMotor2ID = 10;
   public static final int clawTurretID = 7;
   public static final double driveSpeedMultiplier = .8;
   public static final double turretSpeedMultiplier = .2;
