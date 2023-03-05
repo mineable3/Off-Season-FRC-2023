@@ -28,8 +28,15 @@ public class Claw extends SubsystemBase {
     resetEncoder();
   }
 
+  //primary way to move the claw
   public void moveClaw(double speed) {
     clawMotor.set(speed);
+  }
+
+  
+  //stopping all claw movement
+  public void stopClaw() {
+    moveClaw(0);
   }
 
 

@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.ClawCommands;
 
 import com.revrobotics.CANSparkMax.IdleMode;
 
@@ -22,15 +22,20 @@ public class ClawGrab extends CommandBase {
     addRequirements(RobotContainer.m_Claw);
   }
 
+
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {}
+
+
+
+
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
 
-    RobotContainer.m_Claw.moveClaw(amountToClose);
+    RobotContainer.m_Claw.moveClaw(.8);
     
   }
   
@@ -39,8 +44,7 @@ public class ClawGrab extends CommandBase {
   @Override
   public void end(boolean interrupted) {
 
-    RobotContainer.m_Claw.moveClaw(0);
-
+    RobotContainer.m_Claw.stopClaw();
     RobotContainer.m_Claw.clawMotor.setIdleMode(IdleMode.kBrake);
   }
 
@@ -51,6 +55,6 @@ public class ClawGrab extends CommandBase {
   @Override
   public boolean isFinished() {
 
-    return ((RobotContainer.m_Claw.getEncoderPosition() >= amountToClose)/* || OperatingInterface.clawLimitSwitch.getAsBoolean() == false*/);
+    return ((RobotContainer.m_Claw.getEncoderPosition() >= amountToClose));
   } 
 }
