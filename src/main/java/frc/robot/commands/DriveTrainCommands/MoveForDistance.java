@@ -5,6 +5,7 @@
 package frc.robot.commands.DriveTrainCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
 
@@ -41,6 +42,6 @@ public class MoveForDistance extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (((RobotContainer.m_DriveTrain.getDriveEncoders() * (Math.PI * 8)/*circumference of the wheel*/) / 12/*inches to feet*/) >= distance);
+    return ((((RobotContainer.m_DriveTrain.getDriveEncoders() * Constants.driveTrainGearRatio) * (Math.PI * 8)/*circumference of the wheel*/) / 12/*inches to feet*/) >= distance);
   }
 }

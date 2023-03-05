@@ -21,11 +21,6 @@ public class DriveTrain extends SubsystemBase {
   private DifferentialDrive differentialDrive;
   private Pigeon2 gyro;
 
-  //this is kayvon
-
-  
-
-
 
   public DriveTrain() {
 
@@ -35,15 +30,18 @@ public class DriveTrain extends SubsystemBase {
     rightmotor1 = new CANSparkMax(Constants.rightmotorID1, MotorType.kBrushless);
     //rightmotor2 = new CANSparkMax(Constants.rightmotorID2, MotorType.kBrushless);
 
+
+
     //gryo, motor controller groups and differential drive
     leftTrain = new MotorControllerGroup(leftmotor1/*, leftmotor2*/);
     rightTrain = new MotorControllerGroup(rightmotor1/* , rightmotor2*/);
     gyro = new Pigeon2(Constants.pigeonID);
     differentialDrive = new DifferentialDrive(leftTrain, rightTrain);
 
+
+    
     //inverting one side of the robot so we drive straight
     rightTrain.setInverted(true);
-    setEncoderConversionFactor(Constants.driveTrainGearRatio);
     gyro.configMountPose(AxisDirection.NegativeY, AxisDirection.PositiveZ);
 
   }
@@ -80,13 +78,6 @@ public class DriveTrain extends SubsystemBase {
     encoders /= 4;
 
     return encoders;
-  }
-  private void setEncoderConversionFactor(double conversionFactor) {
-    leftmotor1.getEncoder().setPositionConversionFactor(conversionFactor);
-    leftmotor2.getEncoder().setPositionConversionFactor(conversionFactor);
-    rightmotor1.getEncoder().setPositionConversionFactor(conversionFactor);
-    rightmotor2.getEncoder().setPositionConversionFactor(conversionFactor);
-
   }
 
   public void resetEncoders(){

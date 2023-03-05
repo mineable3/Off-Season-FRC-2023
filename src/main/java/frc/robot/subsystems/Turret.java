@@ -15,8 +15,8 @@ import frc.robot.Constants;
 public class Turret extends SubsystemBase {
   /** Creates a new Turret. */
 
-  CANSparkMax turretMotorLeft;
-  CANSparkMax turretMotorRight;
+  private CANSparkMax turretMotorLeft;
+  private CANSparkMax turretMotorRight;
 
   public Turret() {
 

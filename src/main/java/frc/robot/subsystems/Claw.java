@@ -21,7 +21,7 @@ public class Claw extends SubsystemBase {
 
     //CHANGE LIMITS WHEN THE ROBOT IS DONE, THE 10'S ARE JUST PLACE HOLDERS
     clawMotor.setSoftLimit(SoftLimitDirection.kForward, 10);
-    clawMotor.setSoftLimit(SoftLimitDirection.kForward, -10);
+    clawMotor.setSoftLimit(SoftLimitDirection.kReverse, 10);
     clawMotor.enableSoftLimit(SoftLimitDirection.kForward, true);
     clawMotor.enableSoftLimit(SoftLimitDirection.kReverse, true);
 
@@ -34,7 +34,7 @@ public class Claw extends SubsystemBase {
 
 
   //Encoder methods
-  public double getEncoder(){
+  public double getEncoderPosition(){
     return clawMotor.getEncoder().getPosition();
   }
   public void resetEncoder() {

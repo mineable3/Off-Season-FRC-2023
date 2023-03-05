@@ -92,7 +92,7 @@ public class RobotContainer {
     m_auxController.rightTrigger().onTrue(new TurretSpin(m_driverController.getRightTriggerAxis()));
     m_auxController.leftTrigger().onTrue(new TurretSpin(m_driverController.getLeftTriggerAxis()));
     m_auxController.x().onTrue(new LEDColorChange());
-    m_auxController.a().onTrue(new ClawGrab());
+    //m_auxController.a().onTrue(new ClawGrab(put in the claw limit switch when OI is done));
     m_auxController.y().whileTrue(new GamePieceTraking(tx));
   }
 
