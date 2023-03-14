@@ -42,4 +42,8 @@ public void resetArmEncoder(){
 public void stopArm(){
   armMotor.set(0);
 }
+
+
+
+
 }

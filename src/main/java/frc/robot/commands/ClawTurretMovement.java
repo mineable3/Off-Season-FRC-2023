@@ -4,51 +4,48 @@
 
 package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Subsystem;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-public class ClawTurret extends CommandBase {
+public class ClawTurretMovement extends CommandBase {
   /** Creates a new ClawTurret. */
-  public ClawTurret() {
-    // Use addRequirements() here to declare subsystem dependencies.
-   addRequirements(RobotContainer.m_clawTurret);
+  public ClawTurretMovement() {
+    // Use addRequirements() here to declar subsystem dependencies.
+  addRequirements(RobotContainer.m_ClawTurret);
   }
 
-  private void addRequirements(ClawTurret mClawturret) {
-  }
+  
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.m_clawTurret.resetclawTurret();
+    RobotContainer.m_ClawTurret.resetclawTurret();
   }
 
-  private void resetclawTurret() {
-  }
-
+  
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
 
-   double speed = RobotContainer.m_clawTurret.rightJoystick();
+   double speed = RobotContainer.rightJoystick();
 
-   RobotContainer.m_clawTurret.setclawTurret(speed);
+   RobotContainer.m_ClawTurret.setclawTurret(speed);
   }
 
   private double rightJoystick() {
     return 0;
   }
 
-  private void setclawTurret(double speed) {
-  }
-
+  
   // Called once the command ends or is interrupted.
  
 
   @Override
   public void end(boolean interrupted) {
-    double speed = RobotContainer.m_clawTurret.rightJoystick();
-    RobotContainer.m_clawTurret.setclawTurret(speed);
+    double speed = RobotContainer.m_clawTurretMovement.rightJoystick();
+    RobotContainer.m_ClawTurret.setclawTurret(speed);
   }
 
   // Returns true when the command should end.

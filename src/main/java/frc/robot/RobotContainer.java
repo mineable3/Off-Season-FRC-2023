@@ -12,6 +12,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEvent;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
@@ -21,16 +22,19 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.GamePieceTraking;
 import frc.robot.commands.LEDColorChange;
 import frc.robot.commands.TurretSpin;
+import frc.robot.commands.ClawTurretMovement;
 import frc.robot.commands.DriveTrainCommands.ArcadeDrive;
 import frc.robot.commands.DriveTrainCommands.PIDChargingStation;
 import frc.robot.commands.DriveTrainCommands.TurnToAngle;
+import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Turret;
+import frc.robot.subsystems.ClawTurret;
 
 /**
- * This class is where the bulk of the robot should be declared. Since Command-based is a
+ * This class is where he bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
  * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
  * subsystems, commands, and trigger mappings) should be declared here.
@@ -41,8 +45,10 @@ public class RobotContainer {
   public final static DriveTrain m_DriveTrain = new DriveTrain();
   public final static Turret m_Turret = new Turret();
   public final static Claw m_Claw = new Claw();
-  public final static ClawTurret m_clawTurret = new ClawTurret();
-
+  public final static ClawTurretMovement m_clawTurretMovement = new ClawTurretMovement();
+  public final static Arm m_arm = new Arm();
+  public final static ClawTurret m_ClawTurret = new ClawTurret();
+  public final ButtonBind mButton = new ButtonBind();
   private AtomicReference<Double> tx = new AtomicReference<Double>();
   private AtomicReference<Double> tid = new AtomicReference<Double>();
   private DoubleTopic dlbTopic_tx;
@@ -51,10 +57,10 @@ public class RobotContainer {
   public double tidHandle;  
 
   
-  public static final CommandXboxController m_driverController =
-      new CommandXboxController(OperatorConstants.kDriverControllerPort);
-  public static final CommandXboxController m_auxController =
-      new CommandXboxController(OperatorConstants.kAuxControllerPort);
+  //public static final CommandXboxController m_driverController =
+  //    new CommandXboxController(OperatorConstants.kDriverControllerPort);
+  //public static final CommandXboxController m_auxController =
+  //    new CommandXboxController(OperatorConstants.kAuxControllerPort);
 
 
 
@@ -119,18 +125,18 @@ public class RobotContainer {
         tx.set(event.valueData.value.getDouble());
       }
     );
-<<<<<<< HEAD
     //x = tx.getDouble(0);
-    NetworkTableInstance defualtNTinst = NetworkTableInstance.getDefault();
+    
+    NetworkTableInstance defaultNTinst = NetworkTableInstance.getDefault();
     NetworkTable AprilTag = defaultNTinst.getTable("tid");
 
      dlbTopic_tid = AprilTag.getDoubleTopic("tid");
 
+     tidHandle = defaultNTinst.addListener(dlbTopic_tid, EnumSet.of(NetworkTableEvent.Kind.kValueAll),tid.set(event.valueData.value.getDouble));
+
     
 
 
-=======
->>>>>>> 8c4380e9237db90b992bc9680d4e925a2a32d793
   }
 
 
