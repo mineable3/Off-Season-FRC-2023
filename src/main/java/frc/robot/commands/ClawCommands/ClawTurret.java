@@ -11,7 +11,7 @@ public class ClawTurret extends CommandBase {
   /** Creates a new ClawTurret. */
   public ClawTurret() {
     // Use addRequirements() here to declare subsystem dependencies.
-   addRequirements(RobotContainer.m_clawTurret);
+   //addRequirements(RobotContainer.m_clawTurret);
   }
 
   private void addRequirements(ClawTurret mClawturret) {
@@ -20,7 +20,7 @@ public class ClawTurret extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.m_clawTurret.resetclawTurret();
+    //RobotContainer.m_clawTurret.resetclawTurret();
   }
 
   private void resetclawTurret() {
@@ -30,9 +30,9 @@ public class ClawTurret extends CommandBase {
   @Override
   public void execute() {
 
-   double speed = RobotContainer.m_clawTurret.rightJoystick();
+   //double speed = RobotContainer.m_clawTurret.rightJoystick();
 
-   RobotContainer.m_clawTurret.setclawTurret(speed);
+   //RobotContainer.m_clawTurret.setclawTurret(speed);
   }
 
   private double rightJoystick() {
@@ -47,8 +47,8 @@ public class ClawTurret extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    double speed = RobotContainer.m_clawTurret.rightJoystick();
-    RobotContainer.m_clawTurret.setclawTurret(speed);
+    //double speed = RobotContainer.m_clawTurret.rightJoystick();
+    //RobotContainer.m_clawTurret.setclawTurret(speed);
   }
 
   // Returns true when the command should end.

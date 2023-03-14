@@ -19,7 +19,7 @@ import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.LEDColorChange;
 import frc.robot.commands.TurretSpin;
-import frc.robot.commands.ClawCommands.ClawGrab;
+import frc.robot.commands.ClawCommands.*;
 import frc.robot.commands.DriveTrainCommands.ArcadeDrive;
 import frc.robot.commands.DriveTrainCommands.PIDChargingStation;
 import frc.robot.commands.DriveTrainCommands.TurnToAngle;

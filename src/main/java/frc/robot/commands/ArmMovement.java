@@ -13,14 +13,14 @@ public class ArmMovement extends CommandBase {
   /** Creates a new ArmMovement. */
   public ArmMovement() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.m_arm);
+    //addRequirements(RobotContainer.m_arm);
 
   }
  
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-  RobotContainer.m_arm.resetArmEncoder();
+  //RobotContainer.m_arm.resetArmEncoder();
   
   }
  
@@ -37,7 +37,7 @@ public class ArmMovement extends CommandBase {
 
 double speed = RobotContainer.m_driverController.getRightX();
 
-RobotContainer.m_arm.setArm(speed);
+//RobotContainer.m_arm.setArm(speed);
 
 
 
@@ -46,7 +46,7 @@ RobotContainer.m_arm.setArm(speed);
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_arm.setArm(0);
+    //RobotContainer.m_arm.setArm(0);
   }
 
   // Returns true when the command should end.
