@@ -47,38 +47,11 @@ public class Arm extends SubsystemBase {
   }
 
 
-  //Set speed methods for movement
 
-  public void setArmExtend(double speed) {
-    armExtendMotor.set(speed);
+  public void setArmHeight(double inSpeed) {
+    armHeightMotor1.set(inSpeed);
+    armHeightMotor2.set(inSpeed);
   }
-
-  public void setArmHeight(double speed) {
-    armHeight.set(speed);
-  }
-
-
-
-
-
-  //get encoder position methods
-
-  public double getArmExtendPosition() {
-    return armExtendMotor.getEncoder().getPosition();
-  }
-
-  public double getArmHeightPosition() {
-
-    double sumOfEncoders = 
-    armHeightMotor1.getEncoder().getPosition() + armHeightMotor2.getEncoder().getPosition();
-
-    double averagePosition = (sumOfEncoders / 2);
-
-    return averagePosition;
-  }
-
-
-
 
 
   //Encoder reset commands

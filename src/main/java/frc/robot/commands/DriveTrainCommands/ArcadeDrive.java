@@ -26,8 +26,8 @@ public class ArcadeDrive extends CommandBase {
   @Override
   public void execute() {
 
-    double speed = RobotContainer.m_driverController.getRawAxis(OperatorConstants.driveSpeed);
-    double rotation = RobotContainer.m_driverController.getRawAxis(OperatorConstants.driveRotate);
+    double speed = RobotContainer.m_ButtonBind.getDriverLeftY();
+    double rotation = RobotContainer.m_ButtonBind.getDriverRightX();
 
     speed *= Constants.driveSpeedMultiplier;
     rotation *= Constants.driveSpeedMultiplier;
@@ -40,10 +40,6 @@ public class ArcadeDrive extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     RobotContainer.m_DriveTrain.arcadeDrive(0, 0);
-
-    if (RobotContainer.m_driverController.b().getAsBoolean()) {
-      System.out.println(RobotContainer.m_DriveTrain.getPitch());
-    }
   }
 
   // Returns true when the command should end.

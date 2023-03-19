@@ -5,7 +5,6 @@
 package frc.robot.commands.DriveTrainCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants.OperatorConstants;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
@@ -24,8 +23,8 @@ public class TankDrive extends CommandBase {
   @Override
   public void execute() {
     
-    double leftSpeed = RobotContainer.m_driverController.getRawAxis(OperatorConstants.driveLeft);
-    double rightSpeed = RobotContainer.m_driverController.getRawAxis(OperatorConstants.driveRight);
+    double leftSpeed = RobotContainer.m_ButtonBind.getDriverLeftY();
+    double rightSpeed = RobotContainer.m_ButtonBind.getDriverRightY();
 
     leftSpeed *= Constants.driveSpeedMultiplier;
     rightSpeed *= Constants.driveSpeedMultiplier;

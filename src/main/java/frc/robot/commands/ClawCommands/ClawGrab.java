@@ -55,6 +55,6 @@ public class ClawGrab extends CommandBase {
   @Override
   public boolean isFinished() {
 
-    return ((RobotContainer.m_Claw.getEncoderPosition() >= amountToClose));
+    return ((RobotContainer.m_Claw.getclawTurretEncoder() >= amountToClose));
   } 
 }

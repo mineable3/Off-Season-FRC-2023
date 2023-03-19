@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ClawTurret extends SubsystemBase {
   /** Creates a new ClawTurrent. */
+
   CANSparkMax clawTurretMotor;
   
   public ClawTurret() {
@@ -34,7 +35,7 @@ public class ClawTurret extends SubsystemBase {
     clawTurretMotor.getEncoder().setPosition(0);
   }
 
-public void clawTurretMove(double speed){
+public void setclawTurret(double speed){
 clawTurretMotor.set(speed);
 }
 

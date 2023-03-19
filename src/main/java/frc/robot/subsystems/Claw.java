@@ -25,7 +25,7 @@ public class Claw extends SubsystemBase {
     clawMotor.enableSoftLimit(SoftLimitDirection.kForward, true);
     clawMotor.enableSoftLimit(SoftLimitDirection.kReverse, true);
 
-    resetEncoder();
+    resetclawTurretEncoder();
   }
 
   //primary way to move the claw
@@ -41,10 +41,10 @@ public class Claw extends SubsystemBase {
 
 
   //Encoder methods
-  public double getEncoderPosition(){
+  public double getclawTurretEncoder(){
     return clawMotor.getEncoder().getPosition();
   }
-  public void resetEncoder() {
+  public void resetclawTurretEncoder() {
     clawMotor.getEncoder().setPosition(0);
   }
 

@@ -34,7 +34,7 @@ public class ClawOpen extends CommandBase {
 
     RobotContainer.m_Claw.stopClaw();
     RobotContainer.m_Claw.clawMotor.setIdleMode(IdleMode.kBrake);
-    RobotContainer.m_Claw.resetEncoder();
+    RobotContainer.m_Claw.resetclawTurretEncoder();
   }
 
 
