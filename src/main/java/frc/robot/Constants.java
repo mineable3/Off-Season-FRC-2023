@@ -16,8 +16,10 @@ public final class Constants {
 
   public static final int leftmotorID1 = 4;
   public static final int leftmotorID2 = 5;
+  public static final int leftmotorID3 = 31;
   public static final int rightmotorID1 = 2;
   public static final int rightmotorID2 = 3;
+  public static final int rightmotorID3 = 99;
   public static final int turretmotorID = 9;
   public static final int clawMotorID = 6;
   public static final int pigeonID = 0;

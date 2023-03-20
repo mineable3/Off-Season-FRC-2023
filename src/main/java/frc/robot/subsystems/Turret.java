@@ -15,8 +15,7 @@ import frc.robot.Constants;
 public class Turret extends SubsystemBase {
   /** Creates a new Turret. */
 
-  private CANSparkMax turretMotorLeft;
-  private CANSparkMax turretMotorRight;
+  private CANSparkMax turretMotorLeft, turretMotorRight;
 
   public Turret() {
 
@@ -41,30 +40,53 @@ public class Turret extends SubsystemBase {
 
   //Encoder methods
   public double getTurretEncoder() {
-    
     double averageEncoder = turretMotorLeft.getEncoder().getPosition() + turretMotorRight.getEncoder().getPosition();
     averageEncoder /= 2;
     return averageEncoder;
   }
+
 
   public void resetTurretEncoder() {
     turretMotorLeft.getEncoder().setPosition(0);
     turretMotorRight.getEncoder().setPosition(0);
   }
 
+  public CANSparkMax getTurretMotorRight() {
+    return turretMotorRight;
+  }
+
+  public CANSparkMax getTurretMotorLeft() {
+    return turretMotorLeft;
+  }
+
+
+
+
+
   //a method to move the turret
   public void setTurret(double speed) {
 
     //if the turret spins one direction then coast one motor and run the other
     if(speed > 0) {
-    turretMotorLeft.set(speed);
     turretMotorRight.setIdleMode(IdleMode.kCoast);
+    turretMotorLeft.set(speed);
     }
+
     //same thing as before, but the opposite motor
     else if (speed < 0) {
-    turretMotorRight.set(speed);
     turretMotorLeft.setIdleMode(IdleMode.kCoast);
+    turretMotorRight.set(speed);
     }
+  }
+
+
+
+  public void stopTurret() {
+    turretMotorLeft.set(0);
+    turretMotorRight.set(0);
+
+    turretMotorLeft.setIdleMode(IdleMode.kBrake);
+    turretMotorRight.setIdleMode(IdleMode.kBrake);
   }
 
   @Override

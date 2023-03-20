@@ -90,7 +90,8 @@ public class RobotContainer {
         .onTrue(new ExampleCommand(m_exampleSubsystem));
 
     m_DriveTrain.setDefaultCommand(new ArcadeDrive());
-    //m_DriveTrain.setDefaultCommand(new TankDrive());
+
+    
     m_ButtonBind.driverBButton.whileTrue(new TurnToAngle(0));
     m_ButtonBind.driverAButton.whileTrue(new PIDChargingStation());
     
@@ -99,12 +100,13 @@ public class RobotContainer {
     rightJoystick: arm
     leftJoystick: claw turret
     */
-    m_ButtonBind.auxRightBumper.onTrue(new TurretSpin(.8));
-    m_ButtonBind.auxLeftBumper.onTrue(new TurretSpin(-.8));
+    m_ButtonBind.auxRightBumper.whileTrue(new TurretSpin(.8));
+    m_ButtonBind.auxLeftBumper.whileTrue(new TurretSpin(-.8));
     m_ButtonBind.auxXButton.onTrue(new LEDColorChange());
     m_ButtonBind.auxAButton.onTrue(new ClawGrab(.5));
     m_ButtonBind.auxBButton.onTrue(new ClawOpen());
     m_ButtonBind.auxYButton.whileTrue(new GamePieceTraking(tx));
+    
   }
 
 

@@ -230,4 +230,15 @@ public class ButtonBind{
     public Trigger auxDPadRight(){
         return AuxDPadRight;
     }
+
+
+
+//=====================Limit Switches=========================
+
+
+
+
+
+
+
 }

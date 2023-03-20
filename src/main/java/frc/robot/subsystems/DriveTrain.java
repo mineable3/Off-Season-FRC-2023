@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class DriveTrain extends SubsystemBase {
   /** Creates a new DriveTrain. */
 
-  public CANSparkMax leftmotor1, leftmotor2, rightmotor1, rightmotor2;
+  private CANSparkMax leftmotor1, leftmotor2, leftmotor3, rightmotor1, rightmotor2, rightmotor3;
   private MotorControllerGroup leftTrain, rightTrain;
   private DifferentialDrive differentialDrive;
   private Pigeon2 gyro;
@@ -31,15 +31,17 @@ public class DriveTrain extends SubsystemBase {
 
     //drive train motors
     leftmotor1 = new CANSparkMax(Constants.leftmotorID1, MotorType.kBrushless);
-    //leftmotor2 = new CANSparkMax(Constants.leftmotorID2, MotorType.kBrushless);
+    leftmotor2 = new CANSparkMax(Constants.leftmotorID2, MotorType.kBrushless);
+    leftmotor2 = new CANSparkMax(Constants.leftmotorID3, MotorType.kBrushless);
     rightmotor1 = new CANSparkMax(Constants.rightmotorID1, MotorType.kBrushless);
-    //rightmotor2 = new CANSparkMax(Constants.rightmotorID2, MotorType.kBrushless);
+    rightmotor2 = new CANSparkMax(Constants.rightmotorID2, MotorType.kBrushless);
+    rightmotor3 = new CANSparkMax(Constants.rightmotorID3, MotorType.kBrushless);
 
 
 
     //gryo, motor controller groups and differential drive
-    leftTrain = new MotorControllerGroup(leftmotor1/*, leftmotor2*/);
-    rightTrain = new MotorControllerGroup(rightmotor1/* , rightmotor2*/);
+    leftTrain = new MotorControllerGroup(leftmotor1, leftmotor2, rightmotor3);
+    rightTrain = new MotorControllerGroup(rightmotor1 , rightmotor2, rightmotor3);
     gyro = new Pigeon2(Constants.pigeonID);
     differentialDrive = new DifferentialDrive(leftTrain, rightTrain);
 
@@ -77,19 +79,21 @@ public class DriveTrain extends SubsystemBase {
 
     encoders = leftmotor1.getEncoder().getPosition() +
     leftmotor2.getEncoder().getPosition() +
+    leftmotor3.getEncoder().getPosition() +
     rightmotor1.getEncoder().getPosition() +
-    rightmotor2.getEncoder().getPosition();
+    rightmotor2.getEncoder().getPosition() +
+    rightmotor3.getEncoder().getPosition();
 
-    encoders /= 4;
+    encoders /= 6;
 
     return encoders;
   }
 
   public void resetEncoders(){
     leftmotor1.getEncoder().setPosition(0);
-    //leftmotor2.getEncoder().setPosition(0);
+    leftmotor2.getEncoder().setPosition(0);
     rightmotor1.getEncoder().setPosition(0);
-    //rightmotor2.getEncoder().setPosition(0);
+    rightmotor2.getEncoder().setPosition(0);
   }
   
   
@@ -101,6 +105,31 @@ public class DriveTrain extends SubsystemBase {
   public void tankDrive(double leftSpeed, double rightSpeed) {
     differentialDrive.tankDrive(leftSpeed, rightSpeed);
   }
+
+  public CANSparkMax getleftmotor1() {
+    return leftmotor1;
+  }
+
+  public CANSparkMax getleftmotor2() {
+    return leftmotor2;
+  }
+
+  public CANSparkMax getleftmotor3() {
+    return leftmotor3;
+  }
+
+  public CANSparkMax getrightmotor1() {
+    return rightmotor1;
+  }
+
+  public CANSparkMax getrightmotor2() {
+    return rightmotor2;
+  }
+
+  public CANSparkMax getrightmotor3() {
+    return rightmotor3;
+  }
+  
 
   @Override
   public void periodic() {

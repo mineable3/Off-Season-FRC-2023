@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMax.SoftLimitDirection;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import frc.robot.Constants;
@@ -12,7 +13,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Claw extends SubsystemBase {
   /** Creates a new Claw. */
-  public CANSparkMax clawMotor;
+  private CANSparkMax clawMotor;
 
   public Claw() {
 
@@ -30,13 +31,15 @@ public class Claw extends SubsystemBase {
 
   //primary way to move the claw
   public void moveClaw(double speed) {
+    clawMotor.setIdleMode(IdleMode.kCoast);
     clawMotor.set(speed);
   }
 
   
   //stopping all claw movement
   public void stopClaw() {
-    moveClaw(0);
+    clawMotor.set(0);
+    clawMotor.setIdleMode(IdleMode.kBrake);
   }
 
 
@@ -44,8 +47,14 @@ public class Claw extends SubsystemBase {
   public double getclawTurretEncoder(){
     return clawMotor.getEncoder().getPosition();
   }
+
   public void resetclawTurretEncoder() {
     clawMotor.getEncoder().setPosition(0);
+  }
+
+
+  public CANSparkMax getClawMotor() {
+    return clawMotor;
   }
 
   @Override

@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMax.SoftLimitDirection;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -14,8 +15,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Arm extends SubsystemBase {
 
- public CANSparkMax armExtendMotor, armHeightMotor1, armHeightMotor2;
- public MotorControllerGroup armHeight;
+ private CANSparkMax armExtendMotor, armHeightMotor1, armHeightMotor2;
+ private MotorControllerGroup armHeight;
 
   /** Creates a new Arm. */
   
@@ -43,19 +44,30 @@ public class Arm extends SubsystemBase {
    armHeightMotor2.enableSoftLimit(SoftLimitDirection.kForward,true);
    armHeightMotor2.enableSoftLimit(SoftLimitDirection.kReverse, true);
 
-   resetAllArmEncoders();
+   resetArmHeightEncoders();
+   resetArmExtendEncoders();
   }
+
+
 
 
 
   public void setArmHeight(double inSpeed) {
-    armHeightMotor1.set(inSpeed);
-    armHeightMotor2.set(inSpeed);
+    armHeightMotor1.setIdleMode(IdleMode.kCoast);
+    armHeightMotor2.setIdleMode(IdleMode.kCoast);
+    armHeight.set(inSpeed);
+  }
+
+  public void setArmLength(double speed) {
+    armExtendMotor.setIdleMode(IdleMode.kCoast);
+    armExtendMotor.set(speed);
   }
 
 
-  //Encoder reset commands
 
+
+
+  //Encoder reset commands
   public void resetArmExtendEncoder() {
     armExtendMotor.getEncoder().setPosition(0);
   }
@@ -65,19 +77,48 @@ public class Arm extends SubsystemBase {
     armHeightMotor2.getEncoder().setPosition(0);
   }
 
-  public void resetAllArmEncoders() {
-    armHeightMotor1.getEncoder().setPosition(0);
-    armHeightMotor2.getEncoder().setPosition(0);
+  public void resetArmExtendEncoders() {
     armExtendMotor.getEncoder().setPosition(0);
   }
 
 
 
 
-  //stops all movement on the arm
-  public void stopArm(){
-    armExtendMotor.set(0);
+
+  public double getArmExtendEncoder() {
+    return armExtendMotor.getEncoder().getPosition();
+  }
+
+  public double getArmHeightEncoder() {
+    double averageEncoder = (armHeightMotor1.getEncoder().getPosition() + armHeightMotor2.getEncoder().getPosition()) / 2;
+    return averageEncoder;
+  }
+
+public CANSparkMax getArmHeightMotor1() {
+  return armHeightMotor1;
+}
+
+public CANSparkMax getArmHeightMotor2() {
+  return armHeightMotor1;
+}
+
+public CANSparkMax getArmExtendMotor() {
+  return armExtendMotor;
+}
+
+
+
+
+
+  public void stopArmHeight() {
     armHeight.set(0);
+    armHeightMotor1.setIdleMode(IdleMode.kBrake);
+    armHeightMotor2.setIdleMode(IdleMode.kBrake);
+  }
+
+  public void stopArmExtend() {
+    armExtendMotor.set(0);
+    armExtendMotor.setIdleMode(IdleMode.kBrake);
   }
 
 }

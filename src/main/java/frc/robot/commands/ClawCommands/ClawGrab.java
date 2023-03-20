@@ -45,7 +45,7 @@ public class ClawGrab extends CommandBase {
   public void end(boolean interrupted) {
 
     RobotContainer.m_Claw.stopClaw();
-    RobotContainer.m_Claw.clawMotor.setIdleMode(IdleMode.kBrake);
+    //RobotContainer.m_Claw.clawMotor.setIdleMode(IdleMode.kBrake);
   }
 
 
