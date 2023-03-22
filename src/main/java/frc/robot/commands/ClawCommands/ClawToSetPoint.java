@@ -4,17 +4,15 @@
 
 package frc.robot.commands.ClawCommands;
 
-import com.revrobotics.CANSparkMax.IdleMode;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
 
-public class ClawGrab extends CommandBase {
+public class ClawToSetPoint extends CommandBase {
   /** Creates a new ClawGrab. */
   double amountToClose;
 
-  public ClawGrab(double inAmountToClose) {
+  public ClawToSetPoint(double inAmountToClose) {
   
     amountToClose = inAmountToClose;
 
@@ -35,17 +33,18 @@ public class ClawGrab extends CommandBase {
   @Override
   public void execute() {
 
-    RobotContainer.m_Claw.moveClaw(.8);
-    
+    if (amountToClose > 0) {
+      RobotContainer.m_Claw.moveClaw(.8);
+    } else {
+      RobotContainer.m_Claw.moveClaw(-.8);   
+    }
   }
   
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-
     RobotContainer.m_Claw.stopClaw();
-    //RobotContainer.m_Claw.clawMotor.setIdleMode(IdleMode.kBrake);
   }
 
 
@@ -55,6 +54,10 @@ public class ClawGrab extends CommandBase {
   @Override
   public boolean isFinished() {
 
-    return ((RobotContainer.m_Claw.getclawTurretEncoder() >= amountToClose));
+    if (Math.round(RobotContainer.m_Claw.getclawTurretEncoder()) == amountToClose) {
+      return true;
+    } else {
+      return false;
+    }
   } 
 }

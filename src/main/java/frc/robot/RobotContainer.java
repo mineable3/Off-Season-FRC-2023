@@ -17,13 +17,13 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.LEDColorChange;
-import frc.robot.commands.TurretSpin;
-import frc.robot.commands.ClawCommands.ClawGrab;
+import frc.robot.commands.ClawCommands.ClawToSetPoint;
 import frc.robot.commands.ClawCommands.ClawOpen;
 import frc.robot.commands.ClawCommands.ClawTurretMovement;
 import frc.robot.commands.DriveTrainCommands.ArcadeDrive;
 import frc.robot.commands.DriveTrainCommands.PIDChargingStation;
 import frc.robot.commands.DriveTrainCommands.TurnToAngle;
+import frc.robot.commands.TurretCommands.ManualTurretSpin;
 import frc.robot.commands.VisionCommands.GamePieceTraking;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Claw;
@@ -100,10 +100,10 @@ public class RobotContainer {
     rightJoystick: arm
     leftJoystick: claw turret
     */
-    m_ButtonBind.auxRightBumper.whileTrue(new TurretSpin(.8));
-    m_ButtonBind.auxLeftBumper.whileTrue(new TurretSpin(-.8));
+    m_ButtonBind.auxRightBumper.whileTrue(new ManualTurretSpin(.8));
+    m_ButtonBind.auxLeftBumper.whileTrue(new ManualTurretSpin(-.8));
     m_ButtonBind.auxXButton.onTrue(new LEDColorChange());
-    m_ButtonBind.auxAButton.onTrue(new ClawGrab(.5));
+    m_ButtonBind.auxAButton.onTrue(new ClawToSetPoint(.5));
     m_ButtonBind.auxBButton.onTrue(new ClawOpen());
     m_ButtonBind.auxYButton.whileTrue(new GamePieceTraking(tx));
     

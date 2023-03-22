@@ -2,41 +2,39 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.TurretCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
-public class ArmExtend extends CommandBase {
+public class ManualTurretSpin extends CommandBase {
+  /** Creates a new TurretSpin. */
 
-  double speed;
-
-  /** Creates a new ArmExtend. */
-  public ArmExtend(double inSpeed) {
-    speed = inSpeed;
-
+  double turretSpeed;
+  
+  public ManualTurretSpin(double inTurretSpeed) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.m_Arm);
-
+    addRequirements(RobotContainer.m_Turret);
+    turretSpeed = inTurretSpeed;
   }
- 
+
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-  //RobotContainer.m_arm.resetArmEncoder();
-  }
- 
-  
+  public void initialize() {}
+
+
   // Called every time the scheduler runs while the command is scheduled.
-  @Override  
+  @Override
   public void execute() {
-    RobotContainer.m_Arm.setArmLength(speed);
+   RobotContainer.m_Turret.setTurret(turretSpeed);
   }
+
+
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_Arm.setArmHeight(0);
+    RobotContainer.m_Turret.stopTurret();
   }
 
   // Returns true when the command should end.
