@@ -17,7 +17,7 @@ public class Claw extends SubsystemBase {
 
   public Claw() {
 
-    //the motor that opens and shuts the claw
+    //the motor that runs the intake wheels
     clawMotor = new CANSparkMax(Constants.clawMotorID, MotorType.kBrushless);
 
     //CHANGE LIMITS WHEN THE ROBOT IS DONE, THE 10'S ARE JUST PLACE HOLDERS
