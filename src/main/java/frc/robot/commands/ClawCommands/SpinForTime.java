@@ -4,45 +4,52 @@
 
 package frc.robot.commands.ClawCommands;
 
-
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
-public class ClawOpen extends CommandBase {
-  /** Creates a new ClawOpen. */
-  public ClawOpen() {
+public class SpinForTime extends CommandBase {
+  /** Creates a new SpinForTime. */
+
+  double time;
+  double startTime;
+  boolean grabDirection;
+  Timer timey = new Timer();
+
+
+  public SpinForTime(double inTime, boolean directionIn) {
+
+    time = inTime;
+    grabDirection = directionIn;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.m_Claw);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    startTime = Timer.getFPGATimestamp();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.m_Claw.setClaw(-.8);
+    if(grabDirection) {
+      RobotContainer.m_Claw.setClaw(.8);
+    } else {
+      RobotContainer.m_Claw.setClaw(-.8);
+    }
   }
-
-
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-
     RobotContainer.m_Claw.stopClaw();
-    //RobotContainer.m_Claw.clawMotor.setIdleMode(IdleMode.kBrake);
-    RobotContainer.m_Claw.resetclawTurretEncoder();
   }
-
-
-
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    //replace true with the commented out code when OI is done
-    return true/*OperatingInterface.clawLimitSwitch.getAsBoolean == false*/;
+    return ((startTime + time) <= (Timer.getFPGATimestamp()));
   }
 }

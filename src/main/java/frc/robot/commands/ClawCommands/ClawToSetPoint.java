@@ -34,9 +34,9 @@ public class ClawToSetPoint extends CommandBase {
   public void execute() {
 
     if (amountToClose > 0) {
-      RobotContainer.m_Claw.moveClaw(.8);
+      RobotContainer.m_Claw.setClaw(.8);
     } else {
-      RobotContainer.m_Claw.moveClaw(-.8);   
+      RobotContainer.m_Claw.setClaw(-.8);   
     }
   }
   

@@ -6,7 +6,6 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
-import com.revrobotics.CANSparkMax.SoftLimitDirection;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -20,17 +19,11 @@ public class Claw extends SubsystemBase {
     //the motor that runs the intake wheels
     clawMotor = new CANSparkMax(Constants.clawMotorID, MotorType.kBrushless);
 
-    //CHANGE LIMITS WHEN THE ROBOT IS DONE, THE 10'S ARE JUST PLACE HOLDERS
-    clawMotor.setSoftLimit(SoftLimitDirection.kForward, 10);
-    clawMotor.setSoftLimit(SoftLimitDirection.kReverse, 10);
-    clawMotor.enableSoftLimit(SoftLimitDirection.kForward, true);
-    clawMotor.enableSoftLimit(SoftLimitDirection.kReverse, true);
-
     resetclawTurretEncoder();
   }
 
   //primary way to move the claw
-  public void moveClaw(double speed) {
+  public void setClaw(double speed) {
     clawMotor.setIdleMode(IdleMode.kCoast);
     clawMotor.set(speed);
   }

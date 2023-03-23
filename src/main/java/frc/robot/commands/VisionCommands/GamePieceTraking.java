@@ -51,7 +51,7 @@ public class GamePieceTraking extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_Turret.setTurret(0);
+    RobotContainer.m_Turret.stopTurret();
   }
 
   // Returns true when the command should end.
