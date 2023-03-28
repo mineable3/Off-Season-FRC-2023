@@ -116,7 +116,7 @@ public class RobotContainer {
         .onTrue(new ExampleCommand(m_exampleSubsystem));
 
     m_DriveTrain.setDefaultCommand(new ArcadeDrive());
-    m_ArmExtend.setDefaultCommand(new ManualArmExtend(m_ButtonBind.getDriverLeftX()));
+    m_ArmExtend.setDefaultCommand(new ManualArmExtend(m_ButtonBind.getAuxLeftX()));
     m_ArmLift.setDefaultCommand(new ManualArmLift(m_ButtonBind.getAuxrightX()));
 
     
