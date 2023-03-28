@@ -10,13 +10,13 @@ import frc.robot.RobotContainer;
 public class ManualClaw extends CommandBase {
   /** Creates a new ManualClaw. */
 
-  boolean setGrabDirection;
+  boolean setGrab;
 
-  public ManualClaw(boolean grabDirection) {
+  public ManualClaw(boolean grab) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.m_Claw);
 
-    setGrabDirection = grabDirection;
+    setGrab = grab;
   }
 
   // Called when the command is initially scheduled.
@@ -26,7 +26,7 @@ public class ManualClaw extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(setGrabDirection) {
+    if(setGrab) {
       RobotContainer.m_Claw.setClaw(.8);
     } else {
       RobotContainer.m_Claw.setClaw(-.8);

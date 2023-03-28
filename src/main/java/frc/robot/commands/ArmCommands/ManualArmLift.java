@@ -14,7 +14,7 @@ public class ManualArmLift extends CommandBase {
 
   public ManualArmLift(double inSpeed) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.m_Arm);
+    addRequirements(RobotContainer.m_ArmLift);
 
     speed = inSpeed;
   }
@@ -26,13 +26,13 @@ public class ManualArmLift extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.m_Arm.setArmHeight(speed);
+    RobotContainer.m_ArmLift.setArmHeight(speed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_Arm.stopArmHeight();
+    RobotContainer.m_ArmLift.stopArmHeight();
   }
 
   // Returns true when the command should end.

@@ -20,8 +20,8 @@ public class Turret extends SubsystemBase {
   public Turret() {
 
     //the motor that turn the turret
-    turretMotorLeft = new CANSparkMax(Constants.turretmotorID, MotorType.kBrushless);
-    turretMotorRight = new CANSparkMax(Constants.turretmotorID, MotorType.kBrushless);
+    turretMotorLeft = new CANSparkMax(Constants.turretmotorLeftID, MotorType.kBrushless);
+    turretMotorRight = new CANSparkMax(Constants.turretmotorRightID, MotorType.kBrushless);
 
     //setting limits
     //CHANGE LIMITS WHEN THE ROBOT IS DONE, THE 10'S ARE JUST PLACE HOLDERS

@@ -1,7 +1,7 @@
 package frc.robot;
 
 
-import edu.wpi.first.wpilibj.DigitalInput;
+
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -161,30 +161,32 @@ public class ButtonBind{
 
 //==========================Aux Joysticks==============================
 
-    public final Trigger auxLeftJoystick = auxController.leftStick();
+
+    
+    public final Trigger auxLeftJoystickTrigger = new Trigger(auxController.leftStick());
     public final double auxleftY = auxController.getLeftY();
     public final double auxleftX = auxController.getLeftX();
-    public final Trigger auxrightJoystick = auxController.rightStick();
+    public final Trigger auxrightJoystick = new Trigger(auxController.rightStick());
     public final double auxrightY = auxController.getRightY();
     public final double auxrightX = auxController.getRightX();
 
-    public boolean auxLeftJoystick(){
+    public boolean getAuxLeftJoystick(){
         return auxController.leftStick().getAsBoolean();
     }
 
-    public double auxLeftX(){
+    public double getAuxLeftX(){
         return auxController.getLeftX();
     }
-    public double auxLeftY(){
+    public double getAuxLeftY(){
         return auxController.getLeftY();
     }
-    public boolean auxrightJoystick(){
+    public boolean getAuxrightJoystick(){
         return auxController.rightStick().getAsBoolean();
     }
-    public double auxrightY(){
+    public double getAuxrightY(){
         return auxController.getRightY();
     }
-    public double auxrightX(){
+    public double getAuxrightX(){
         return auxController.getRightX();
     }
 
@@ -230,15 +232,6 @@ public class ButtonBind{
     public Trigger auxDPadRight(){
         return AuxDPadRight;
     }
-
-
-
-//=====================Limit Switches=========================
-
-
-
-
-
 
 
 }

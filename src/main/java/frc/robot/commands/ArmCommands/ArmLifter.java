@@ -13,7 +13,7 @@ public class ArmLifter extends CommandBase {
 
   public ArmLifter(double inAmountToLift) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.m_Arm);
+    addRequirements(RobotContainer.m_ArmLift);
 
     amountToLift = inAmountToLift;
   }
@@ -27,23 +27,23 @@ public class ArmLifter extends CommandBase {
   public void execute() {
 
     if(amountToLift > 0) { 
-      RobotContainer.m_Arm.setArmHeight(.8);
+      RobotContainer.m_ArmLift.setArmHeight(.8);
     } else {
-      RobotContainer.m_Arm.setArmHeight(-.8);    
+      RobotContainer.m_ArmLift.setArmHeight(-.8);    
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_Arm.stopArmHeight();
+    RobotContainer.m_ArmLift.stopArmHeight();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
 
-    if (Math.round(RobotContainer.m_Arm.getArmHeightEncoder()) == amountToLift) {
+    if (Math.round(RobotContainer.m_ArmLift.getArmHeightEncoder()) == amountToLift) {
       return true;
     } else {
       return false;

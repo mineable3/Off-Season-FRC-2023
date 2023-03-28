@@ -16,7 +16,7 @@ public class ArmExtend extends CommandBase {
     amountToExtend = inAmountToExtend;
 
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.m_Arm);
+    addRequirements(RobotContainer.m_ArmExtend);
 
   }
  
@@ -30,23 +30,23 @@ public class ArmExtend extends CommandBase {
   public void execute() {
 
     if(amountToExtend > 0) {
-      RobotContainer.m_Arm.setArmLength(.5);
+      RobotContainer.m_ArmExtend.setArmLength(.5);
     } else {
-      RobotContainer.m_Arm.setArmLength(-.5);
+      RobotContainer.m_ArmExtend.setArmLength(-.5);
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_Arm.stopArmExtend();
+    RobotContainer.m_ArmExtend.stopArmExtend();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
 
-    if ((Math.round(RobotContainer.m_Arm.getArmExtendEncoder()) == amountToExtend)) {
+    if ((Math.round(RobotContainer.m_ArmExtend.getArmExtendEncoder()) == amountToExtend)) {
       return true;
     } else {
       return false;

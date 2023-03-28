@@ -20,11 +20,12 @@ public final class Constants {
   public static final int rightmotorID1 = 2;
   public static final int rightmotorID2 = 3;
   public static final int rightmotorID3 = 99;
-  public static final int turretmotorID = 9;
+  public static final int turretmotorRightID = 9;
+  public static final int turretmotorLeftID = 21;
   public static final int clawMotorID = 6;
   public static final int pigeonID = 0;
   public static final int armExtendMotorID = 8;
-  public static final int armHeightMotor1ID = 9;
+  public static final int armHeightMotor1ID = 12;
   public static final int armHeightMotor2ID = 10;
   public static final int clawTurretID = 7;
   public static final double driveSpeedMultiplier = .8;

@@ -12,23 +12,25 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEvent;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.ClawCommands.ClawTurretMovement;
+import frc.robot.commands.ArmCommands.ManualArmExtend;
+import frc.robot.commands.ArmCommands.ManualArmLift;
 import frc.robot.commands.ClawCommands.ManualClaw;
 import frc.robot.commands.DriveTrainCommands.ArcadeDrive;
 import frc.robot.commands.DriveTrainCommands.PIDChargingStation;
 import frc.robot.commands.DriveTrainCommands.TurnToAngle;
 import frc.robot.commands.TurretCommands.ManualTurretSpin;
 import frc.robot.commands.VisionCommands.GamePieceTraking;
-import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.ArmExtend;
+import frc.robot.subsystems.ArmLift;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Turret;
-import frc.robot.subsystems.ClawTurret;
 
 /**
  * This class is where he bulk of the robot should be declared. Since Command-based is a
@@ -42,9 +44,8 @@ public class RobotContainer {
   public final static DriveTrain m_DriveTrain = new DriveTrain();
   public final static Turret m_Turret = new Turret();
   public final static Claw m_Claw = new Claw();
-  public final static ClawTurretMovement m_clawTurretMovement = new ClawTurretMovement();
-  public final static Arm m_Arm = new Arm();
-  public final static ClawTurret m_ClawTurret = new ClawTurret();
+  public final static ArmLift m_ArmLift = new ArmLift();
+  public final static ArmExtend m_ArmExtend = new ArmExtend();
   public final static ButtonBind m_ButtonBind = new ButtonBind();
 
   private AtomicReference<Double> tv = new AtomicReference<Double>();
@@ -115,6 +116,8 @@ public class RobotContainer {
         .onTrue(new ExampleCommand(m_exampleSubsystem));
 
     m_DriveTrain.setDefaultCommand(new ArcadeDrive());
+    m_ArmExtend.setDefaultCommand(new ManualArmExtend(m_ButtonBind.getDriverLeftX()));
+    m_ArmLift.setDefaultCommand(new ManualArmLift(m_ButtonBind.getAuxrightX()));
 
     
     m_ButtonBind.driverBButton.whileTrue(new TurnToAngle(0));
@@ -125,6 +128,8 @@ public class RobotContainer {
     rightJoystick: arm
     leftJoystick: claw turret
     */
+    //m_ButtonBind.auxleftX.whileTrue(new ManualArmExtend(0));
+
     m_ButtonBind.auxRightBumper.whileTrue(new ManualTurretSpin(.8));
     m_ButtonBind.auxLeftBumper.whileTrue(new ManualTurretSpin(-.8));
     m_ButtonBind.auxXButton.onTrue(new ManualClaw(true));
