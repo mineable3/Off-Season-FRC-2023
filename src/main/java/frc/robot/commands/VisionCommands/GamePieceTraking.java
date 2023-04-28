@@ -22,9 +22,7 @@ public class GamePieceTraking extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    RobotContainer.m_Turret.resetTurretEncoder();
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -57,6 +55,6 @@ public class GamePieceTraking extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Math.abs(offSet.get()) <= .1 ;
+    return Math.abs(offSet.get()) <= 3 ;
   }
 }
