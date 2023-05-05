@@ -66,16 +66,20 @@ public class Turret extends SubsystemBase {
   //a method to move the turret
   public void setTurret(double speed) {
 
-    //if the turret spins one direction then coast one motor and run the other
-    if(speed > 0) {
+    turretMotorLeft.setIdleMode(IdleMode.kCoast);
     turretMotorRight.setIdleMode(IdleMode.kCoast);
+
+    //if the turret spins one direction then coast one motor and run the other
+    if(speed < 0) {
     turretMotorLeft.set(speed);
+    turretMotorRight.set(0);
     }
 
     //same thing as before, but the opposite motor
-    else if (speed < 0) {
-    turretMotorLeft.setIdleMode(IdleMode.kCoast);
+    else if (speed > 0) {
     turretMotorRight.set(speed);
+    turretMotorLeft.set(0);
+
     }
   }
 

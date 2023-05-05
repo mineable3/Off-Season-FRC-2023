@@ -23,6 +23,7 @@ import frc.robot.commands.ClawCommands.ManualClaw;
 import frc.robot.commands.DriveTrainCommands.ArcadeDrive;
 import frc.robot.commands.DriveTrainCommands.PIDChargingStation;
 import frc.robot.commands.DriveTrainCommands.TurnToAngle;
+import frc.robot.commands.SetPoints.Home;
 import frc.robot.commands.TurretCommands.ManualTurretSpin;
 import frc.robot.commands.VisionCommands.GamePieceTraking;
 import frc.robot.subsystems.ArmExtend;
@@ -116,26 +117,39 @@ public class RobotContainer {
         .onTrue(new ExampleCommand(m_exampleSubsystem));
 
     m_DriveTrain.setDefaultCommand(new ArcadeDrive());
-    m_ArmExtend.setDefaultCommand(new ManualArmExtend(m_ButtonBind.getAuxLeftX()));
-    m_ArmLift.setDefaultCommand(new ManualArmLift(m_ButtonBind.getAuxrightX()));
-
-    
-    m_ButtonBind.driverBButton.whileTrue(new TurnToAngle(0));
-    m_ButtonBind.driverAButton.whileTrue(new PIDChargingStation());
     
 
+    
+   //// m_ButtonBind.driverBButton.whileTrue(new TurnToAngle(0));
+   // m_ButtonBind.driverAButton.whileTrue(new PIDChargingStation());
+    
     /*aux will also 
     rightJoystick: arm
     leftJoystick: claw turret
     */
-    //m_ButtonBind.auxleftX.whileTrue(new ManualArmExtend(0));
 
-    m_ButtonBind.auxRightBumper.whileTrue(new ManualTurretSpin(.8));
-    m_ButtonBind.auxLeftBumper.whileTrue(new ManualTurretSpin(-.8));
-    m_ButtonBind.auxXButton.onTrue(new ManualClaw(true));
-    m_ButtonBind.auxAButton.onTrue(new ManualClaw(false));
-    //m_ButtonBind.auxBButton.onTrue(new );
+    //turret
+    m_ButtonBind.auxRightBumper.whileTrue(new ManualTurretSpin(.3));
+    m_ButtonBind.auxLeftBumper.whileTrue(new ManualTurretSpin(-.3));
+
+    //claw
+    m_ButtonBind.auxXButton.whileTrue(new ManualClaw(true));
+    m_ButtonBind.auxAButton.whileTrue(new ManualClaw(false));
+
+    //setpoints
+    m_ButtonBind.auxBButton.onTrue(new Home());
+
+    //vision
     m_ButtonBind.auxYButton.whileTrue(new GamePieceTraking(tx));
+
+    //arm lift
+    m_ButtonBind.auxrightJoystickYup.whileTrue(new ManualArmLift(.6));
+    m_ButtonBind.auxrightJoystickYdown.whileTrue(new ManualArmLift(-.6));
+    
+    //arm extend
+    
+    m_ButtonBind.auxleftJoystickYup.whileTrue(new ManualArmExtend(.6));
+    m_ButtonBind.auxleftJoystickYdown.whileTrue(new ManualArmExtend(-.6));
     
   }
 

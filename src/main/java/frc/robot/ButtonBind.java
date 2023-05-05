@@ -163,10 +163,13 @@ public class ButtonBind{
 
 
     
-    public final Trigger auxLeftJoystickTrigger = new Trigger(auxController.leftStick());
+    //public final Trigger auxLeftJoystickTrigger = auxController.axisGreaterThan(1, .5);
     public final double auxleftY = auxController.getLeftY();
     public final double auxleftX = auxController.getLeftX();
-    public final Trigger auxrightJoystick = new Trigger(auxController.rightStick());
+    public final Trigger auxrightJoystickYup = auxController.axisGreaterThan(1, .4);
+    public final Trigger auxrightJoystickYdown = auxController.axisLessThan(1, -.4);
+    public final Trigger auxleftJoystickYup = auxController.axisGreaterThan(5, .4);
+    public final Trigger auxleftJoystickYdown = auxController.axisLessThan(5, -.4);
     public final double auxrightY = auxController.getRightY();
     public final double auxrightX = auxController.getRightX();
 
