@@ -11,6 +11,8 @@ import edu.wpi.first.networktables.DoubleTopic;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEvent;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -86,7 +88,7 @@ public class RobotContainer {
   public double tvertHandle; //Vertical sidelength of the rough bounding box (0 - 320 pixels)
   public double tidHandle; //ID of the primary in-view AprilTag
 
-
+  SendableChooser<Command> autoChooser;
 
 
 
@@ -95,6 +97,7 @@ public class RobotContainer {
     // Configure the trigger bindings    
     configureBindings();
     configureNetworkTables();
+    configureShuffleBoard();
   }
 
 
@@ -152,6 +155,19 @@ public class RobotContainer {
     m_ButtonBind.auxleftJoystickYdown.whileTrue(new ManualArmExtend(-.6));
     
   }
+
+
+//===============================Shuffle board=====================================
+
+    private void configureShuffleBoard() {
+      autoChooser = new SendableChooser<Command>();
+
+      //autoChooser.setDefaultOption("name", new autoCommand());
+
+      //autonomousChooser.addOption("different name", new alternateAutoCommand());
+
+      Shuffleboard.getTab("Main").add(autoChooser);
+    }
 
 
 
@@ -294,6 +310,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return Autos.exampleAuto(m_exampleSubsystem);
+    return autoChooser.getSelected();
   }
 }
