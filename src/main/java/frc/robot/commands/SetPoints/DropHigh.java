@@ -5,8 +5,8 @@
 package frc.robot.commands.SetPoints;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import frc.robot.commands.ArmCommands.ArmExtend;
-import frc.robot.commands.ArmCommands.ArmLifter;
+import frc.robot.commands.ArmCommands.ArmEncoderExtend;
+import frc.robot.commands.ArmCommands.ArmEncoderLift;
 import frc.robot.commands.TurretCommands.TurretToSetPoint;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -19,7 +19,7 @@ public class DropHigh extends ParallelCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new TurretToSetPoint(0),
-      new ArmExtend(0),//Find the actual encoder value
-      new ArmLifter(0));//Find the actual encoder value);
+      new ArmEncoderExtend(0),//Find the actual encoder value
+      new ArmEncoderLift(0));//Find the actual encoder value);
   }
 }

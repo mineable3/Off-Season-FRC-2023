@@ -21,16 +21,16 @@ import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.ArmCommands.ManualArmExtend;
 import frc.robot.commands.ArmCommands.ManualArmLift;
-import frc.robot.commands.ClawCommands.ManualClaw;
 import frc.robot.commands.DriveTrainCommands.ArcadeDrive;
 import frc.robot.commands.DriveTrainCommands.PIDChargingStation;
 import frc.robot.commands.DriveTrainCommands.TurnToAngle;
+import frc.robot.commands.IntakeCommands.ManualIntake;
 import frc.robot.commands.SetPoints.Home;
 import frc.robot.commands.TurretCommands.ManualTurretSpin;
 import frc.robot.commands.VisionCommands.GamePieceTraking;
 import frc.robot.subsystems.ArmExtend;
 import frc.robot.subsystems.ArmLift;
-import frc.robot.subsystems.Claw;
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Turret;
@@ -46,22 +46,22 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   public final static DriveTrain m_DriveTrain = new DriveTrain();
   public final static Turret m_Turret = new Turret();
-  public final static Claw m_Claw = new Claw();
+  public final static Intake m_Claw = new Intake();
   public final static ArmLift m_ArmLift = new ArmLift();
   public final static ArmExtend m_ArmExtend = new ArmExtend();
   public final static ButtonBind m_ButtonBind = new ButtonBind();
 
-  private AtomicReference<Double> tv = new AtomicReference<Double>();
-  private AtomicReference<Double> tx = new AtomicReference<Double>();
-  private AtomicReference<Double> ty = new AtomicReference<Double>();
-  private AtomicReference<Double> ta = new AtomicReference<Double>();
-  private AtomicReference<Double> tl = new AtomicReference<Double>();
-  private AtomicReference<Double> cl = new AtomicReference<Double>();
-  private AtomicReference<Double> tshort = new AtomicReference<Double>();
-  private AtomicReference<Double> tlong = new AtomicReference<Double>();
-  private AtomicReference<Double> thor = new AtomicReference<Double>();
-  private AtomicReference<Double> tvert = new AtomicReference<Double>();
-  private AtomicReference<Double> tid = new AtomicReference<Double>();
+  public static AtomicReference<Double> tv = new AtomicReference<Double>();
+  public static AtomicReference<Double> tx = new AtomicReference<Double>();
+  public static AtomicReference<Double> ty = new AtomicReference<Double>();
+  public static AtomicReference<Double> ta = new AtomicReference<Double>();
+  public static AtomicReference<Double> tl = new AtomicReference<Double>();
+  public static AtomicReference<Double> cl = new AtomicReference<Double>();
+  public static AtomicReference<Double> tshort = new AtomicReference<Double>();
+  public static AtomicReference<Double> tlong = new AtomicReference<Double>();
+  public static AtomicReference<Double> thor = new AtomicReference<Double>();
+  public static AtomicReference<Double> tvert = new AtomicReference<Double>();
+  public static AtomicReference<Double> tid = new AtomicReference<Double>();
 
   private DoubleTopic dlbTopic_tv;
   private DoubleTopic dlbTopic_tx;
@@ -136,8 +136,8 @@ public class RobotContainer {
     m_ButtonBind.auxLeftBumper.whileTrue(new ManualTurretSpin(-.3));
 
     //claw
-    m_ButtonBind.auxXButton.whileTrue(new ManualClaw(true));
-    m_ButtonBind.auxAButton.whileTrue(new ManualClaw(false));
+    m_ButtonBind.auxXButton.whileTrue(new ManualIntake(true));
+    m_ButtonBind.auxAButton.whileTrue(new ManualIntake(false));
 
     //setpoints
     m_ButtonBind.auxBButton.onTrue(new Home());

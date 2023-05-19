@@ -11,11 +11,15 @@ import frc.robot.RobotContainer;
 
 public class TurnToTarget extends CommandBase {
 
-  AtomicReference<Double> tx;
+  private double speed;
+
+  
 
   /** Creates a new TurnToTarget. */
-  public TurnToTarget(AtomicReference<Double> intx) {
-   tx = intx;
+  public TurnToTarget(double setSpeed) {
+   
+
+    speed =  setSpeed;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.m_DriveTrain);
   }
@@ -27,10 +31,12 @@ public class TurnToTarget extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(tx.get() < -3) {
+    if(RobotContainer.tx.get() < -3) {
+      RobotContainer.m_DriveTrain.arcadeDrive(0, speed);
       //turn right
     }
-    else if(tx.get() > 3) {
+    else if(RobotContainer.tx.get() > 3) {
+      RobotContainer.m_DriveTrain.arcadeDrive(0, speed);
       //turn left
     }
 
