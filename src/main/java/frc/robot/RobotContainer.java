@@ -14,20 +14,17 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.ArmCommands.ManualArmExtend;
 import frc.robot.commands.ArmCommands.ManualArmLift;
 import frc.robot.commands.ClawCommands.ManualClaw;
 import frc.robot.commands.DriveTrainCommands.ArcadeDrive;
-import frc.robot.commands.DriveTrainCommands.PIDChargingStation;
-import frc.robot.commands.DriveTrainCommands.TurnToAngle;
 import frc.robot.commands.SetPoints.Home;
 import frc.robot.commands.TurretCommands.ManualTurretSpin;
 import frc.robot.commands.VisionCommands.GamePieceTraking;
+import frc.robot.commands.VisionCommands.TurnToTarget;
 import frc.robot.subsystems.ArmExtend;
 import frc.robot.subsystems.ArmLift;
 import frc.robot.subsystems.Claw;
@@ -51,17 +48,17 @@ public class RobotContainer {
   public final static ArmExtend m_ArmExtend = new ArmExtend();
   public final static ButtonBind m_ButtonBind = new ButtonBind();
 
-  private AtomicReference<Double> tv = new AtomicReference<Double>();
-  private AtomicReference<Double> tx = new AtomicReference<Double>();
-  private AtomicReference<Double> ty = new AtomicReference<Double>();
-  private AtomicReference<Double> ta = new AtomicReference<Double>();
-  private AtomicReference<Double> tl = new AtomicReference<Double>();
-  private AtomicReference<Double> cl = new AtomicReference<Double>();
-  private AtomicReference<Double> tshort = new AtomicReference<Double>();
-  private AtomicReference<Double> tlong = new AtomicReference<Double>();
-  private AtomicReference<Double> thor = new AtomicReference<Double>();
-  private AtomicReference<Double> tvert = new AtomicReference<Double>();
-  private AtomicReference<Double> tid = new AtomicReference<Double>();
+  public static AtomicReference<Double> tv = new AtomicReference<Double>();
+  public static AtomicReference<Double> tx = new AtomicReference<Double>();
+  public static AtomicReference<Double> ty = new AtomicReference<Double>();
+  public static AtomicReference<Double> ta = new AtomicReference<Double>();
+  public static AtomicReference<Double> tl = new AtomicReference<Double>();
+  public static AtomicReference<Double> cl = new AtomicReference<Double>();
+  public static AtomicReference<Double> tshort = new AtomicReference<Double>();
+  public static AtomicReference<Double> tlong = new AtomicReference<Double>();
+  public static AtomicReference<Double> thor = new AtomicReference<Double>();
+  public static AtomicReference<Double> tvert = new AtomicReference<Double>();
+  public static AtomicReference<Double> tid = new AtomicReference<Double>();
 
   private DoubleTopic dlbTopic_tv;
   private DoubleTopic dlbTopic_tx;
@@ -143,7 +140,7 @@ public class RobotContainer {
     m_ButtonBind.auxBButton.onTrue(new Home());
 
     //vision
-    m_ButtonBind.auxYButton.whileTrue(new GamePieceTraking(tx));
+    m_ButtonBind.auxYButton.whileTrue(new TurnToTarget(.3));
 
     //arm lift
     m_ButtonBind.auxrightJoystickYup.whileTrue(new ManualArmLift(.6));

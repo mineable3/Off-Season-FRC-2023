@@ -7,12 +7,12 @@ package frc.robot.commands.ArmCommands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
-public class ArmExtend extends CommandBase {
+public class ArmEncoderExtend extends CommandBase {
 
   double amountToExtend;
 
   /** Creates a new ArmExtend. */
-  public ArmExtend(double inAmountToExtend) {
+  public ArmEncoderExtend(double inAmountToExtend) {
     amountToExtend = inAmountToExtend;
 
     // Use addRequirements() here to declare subsystem dependencies.

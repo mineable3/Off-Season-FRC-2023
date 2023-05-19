@@ -7,11 +7,11 @@ package frc.robot.commands.ArmCommands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
-public class ArmLifter extends CommandBase {
+public class ArmEncoderLift extends CommandBase {
   /** Creates a new ArmLifter. */
   double amountToLift;
 
-  public ArmLifter(double inAmountToLift) {
+  public ArmEncoderLift(double inAmountToLift) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.m_ArmLift);
 

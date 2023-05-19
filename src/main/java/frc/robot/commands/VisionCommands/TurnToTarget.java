@@ -4,18 +4,21 @@
 
 package frc.robot.commands.VisionCommands;
 
-import java.util.concurrent.atomic.AtomicReference;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
 public class TurnToTarget extends CommandBase {
 
-  AtomicReference<Double> tx;
+  private double speed;
 
-  /** Creates a new TurnToTarget. */
-  public TurnToTarget(AtomicReference<Double> intx) {
-   tx = intx;
+  /** Creates a new TurnToTarget. 
+   * @param setSpeed the speed should always be positive and dictates how fast the robot will turn
+   * 
+  */
+  public TurnToTarget(double setSpeed) {
+
+    speed = setSpeed;
+
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.m_DriveTrain);
   }
@@ -27,11 +30,13 @@ public class TurnToTarget extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(tx.get() < -3) {
-      //turn right
+
+    if(RobotContainer.tx.get() < -3) {
+      RobotContainer.m_DriveTrain.arcadeDrive(0, speed);
     }
-    else if(tx.get() > 3) {
-      //turn left
+
+    else if(RobotContainer.tx.get() > 3) {
+      RobotContainer.m_DriveTrain.arcadeDrive(0, -speed);
     }
 
   }
@@ -43,6 +48,11 @@ public class TurnToTarget extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+
+    if(Math.abs(RobotContainer.tx.get()) <= 3) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
