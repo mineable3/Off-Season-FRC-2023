@@ -46,7 +46,7 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   public final static DriveTrain m_DriveTrain = new DriveTrain();
   public final static Turret m_Turret = new Turret();
-  public final static Intake m_Claw = new Intake();
+  public final static Intake m_Intake = new Intake();
   public final static ArmLift m_ArmLift = new ArmLift();
   public final static ArmExtend m_ArmExtend = new ArmExtend();
   public final static ButtonBind m_ButtonBind = new ButtonBind();

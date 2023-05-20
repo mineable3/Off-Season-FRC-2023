@@ -9,7 +9,7 @@ import frc.robot.RobotContainer;
 
 
 public class IntakeToSetPoint extends CommandBase {
-  /** Creates a new ClawGrab. */
+  /** Creates a new Intake. */
   double amountToClose;
 
   public IntakeToSetPoint(double inAmountToClose) {
@@ -17,7 +17,7 @@ public class IntakeToSetPoint extends CommandBase {
     amountToClose = inAmountToClose;
 
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.m_Claw);
+    addRequirements(RobotContainer.m_Intake);
   }
 
 
@@ -34,9 +34,9 @@ public class IntakeToSetPoint extends CommandBase {
   public void execute() {
 
     if (amountToClose > 0) {
-      RobotContainer.m_Claw.setClaw(.8);
+      RobotContainer.m_Intake.setClaw(.8);
     } else {
-      RobotContainer.m_Claw.setClaw(-.8);   
+      RobotContainer.m_Intake.setClaw(-.8);   
     }
   }
   
@@ -44,7 +44,7 @@ public class IntakeToSetPoint extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_Claw.stopClaw();
+    RobotContainer.m_Intake.stopClaw();
   }
 
 
@@ -54,7 +54,7 @@ public class IntakeToSetPoint extends CommandBase {
   @Override
   public boolean isFinished() {
 
-    if (Math.round(RobotContainer.m_Claw.getclawTurretEncoder()) == amountToClose) {
+    if (Math.round(RobotContainer.m_Intake.getclawTurretEncoder()) == amountToClose) {
       return true;
     } else {
       return false;

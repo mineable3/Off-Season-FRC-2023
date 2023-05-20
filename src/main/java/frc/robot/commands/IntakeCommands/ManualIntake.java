@@ -8,13 +8,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
 public class ManualIntake extends CommandBase {
-  /** Creates a new ManualClaw. */
+  /** Creates a new ManualIntake. */
 
   boolean setGrab;
 
   public ManualIntake(boolean grab) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.m_Claw);
+    addRequirements(RobotContainer.m_Intake);
 
     setGrab = grab;
   }
@@ -27,16 +27,16 @@ public class ManualIntake extends CommandBase {
   @Override
   public void execute() {
     if(setGrab) {
-      RobotContainer.m_Claw.setClaw(.8);
+      RobotContainer.m_Intake.setClaw(.8);
     } else {
-      RobotContainer.m_Claw.setClaw(-.8);
+      RobotContainer.m_Intake.setClaw(-.8);
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_Claw.stopClaw();
+    RobotContainer.m_Intake.stopClaw();
   }
 
   // Returns true when the command should end.
