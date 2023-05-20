@@ -2,19 +2,19 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.ClawCommands;
+package frc.robot.commands.IntakeCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
-public class ManualClaw extends CommandBase {
-  /** Creates a new ManualClaw. */
+public class ManualIntake extends CommandBase {
+  /** Creates a new ManualIntake. */
 
   boolean setGrab;
 
-  public ManualClaw(boolean grab) {
+  public ManualIntake(boolean grab) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.m_Claw);
+    addRequirements(RobotContainer.m_Intake);
 
     setGrab = grab;
   }
@@ -27,16 +27,16 @@ public class ManualClaw extends CommandBase {
   @Override
   public void execute() {
     if(setGrab) {
-      RobotContainer.m_Claw.setClaw(.8);
+      RobotContainer.m_Intake.setClaw(.8);
     } else {
-      RobotContainer.m_Claw.setClaw(-.8);
+      RobotContainer.m_Intake.setClaw(-.8);
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_Claw.stopClaw();
+    RobotContainer.m_Intake.stopClaw();
   }
 
   // Returns true when the command should end.

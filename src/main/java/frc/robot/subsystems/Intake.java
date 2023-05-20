@@ -10,11 +10,11 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class Claw extends SubsystemBase {
+public class Intake extends SubsystemBase {
   /** Creates a new Claw. */
   private CANSparkMax clawMotor;
 
-  public Claw() {
+  public Intake() {
 
     //the motor that runs the intake wheels
     clawMotor = new CANSparkMax(Constants.clawMotorID, MotorType.kBrushless);

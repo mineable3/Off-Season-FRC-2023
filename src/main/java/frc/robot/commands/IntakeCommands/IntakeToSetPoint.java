@@ -2,22 +2,22 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.ClawCommands;
+package frc.robot.commands.IntakeCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
 
-public class ClawToSetPoint extends CommandBase {
-  /** Creates a new ClawGrab. */
+public class IntakeToSetPoint extends CommandBase {
+  /** Creates a new Intake. */
   double amountToClose;
 
-  public ClawToSetPoint(double inAmountToClose) {
+  public IntakeToSetPoint(double inAmountToClose) {
   
     amountToClose = inAmountToClose;
 
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.m_Claw);
+    addRequirements(RobotContainer.m_Intake);
   }
 
 
@@ -34,9 +34,9 @@ public class ClawToSetPoint extends CommandBase {
   public void execute() {
 
     if (amountToClose > 0) {
-      RobotContainer.m_Claw.setClaw(.8);
+      RobotContainer.m_Intake.setClaw(.8);
     } else {
-      RobotContainer.m_Claw.setClaw(-.8);   
+      RobotContainer.m_Intake.setClaw(-.8);   
     }
   }
   
@@ -44,7 +44,7 @@ public class ClawToSetPoint extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_Claw.stopClaw();
+    RobotContainer.m_Intake.stopClaw();
   }
 
 
@@ -54,7 +54,7 @@ public class ClawToSetPoint extends CommandBase {
   @Override
   public boolean isFinished() {
 
-    if (Math.round(RobotContainer.m_Claw.getclawTurretEncoder()) == amountToClose) {
+    if (Math.round(RobotContainer.m_Intake.getclawTurretEncoder()) == amountToClose) {
       return true;
     } else {
       return false;

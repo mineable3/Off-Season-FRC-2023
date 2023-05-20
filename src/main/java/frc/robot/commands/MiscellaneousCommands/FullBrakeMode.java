@@ -21,13 +21,13 @@ public class FullBrakeMode extends CommandBase {
   public void initialize() {
     RobotContainer.m_ArmExtend.stopArmExtend();
     RobotContainer.m_ArmLift.stopArmHeight();
-    RobotContainer.m_Claw.stopClaw();
+    RobotContainer.m_Intake.stopClaw();
     RobotContainer.m_Turret.stopTurret();
 
     RobotContainer.m_ArmExtend.getArmExtendMotor().setIdleMode(IdleMode.kBrake);
     RobotContainer.m_ArmLift.getArmHeightMotor1().setIdleMode(IdleMode.kBrake);
     RobotContainer.m_ArmLift.getArmHeightMotor2().setIdleMode(IdleMode.kBrake);
-    RobotContainer.m_Claw.getClawMotor().setIdleMode(IdleMode.kBrake);
+    RobotContainer.m_Intake.getClawMotor().setIdleMode(IdleMode.kBrake);
     RobotContainer.m_Turret.getTurretMotorLeft().setIdleMode(IdleMode.kBrake);
     RobotContainer.m_Turret.getTurretMotorRight().setIdleMode(IdleMode.kBrake);
     RobotContainer.m_DriveTrain.getleftmotor1().setIdleMode(IdleMode.kBrake);
@@ -50,7 +50,7 @@ public class FullBrakeMode extends CommandBase {
     RobotContainer.m_ArmExtend.getArmExtendMotor().setIdleMode(IdleMode.kCoast);
     RobotContainer.m_ArmLift.getArmHeightMotor1().setIdleMode(IdleMode.kCoast);
     RobotContainer.m_ArmLift.getArmHeightMotor2().setIdleMode(IdleMode.kCoast);
-    RobotContainer.m_Claw.getClawMotor().setIdleMode(IdleMode.kCoast);
+    RobotContainer.m_Intake.getClawMotor().setIdleMode(IdleMode.kCoast);
     RobotContainer.m_Turret.getTurretMotorLeft().setIdleMode(IdleMode.kCoast);
     RobotContainer.m_Turret.getTurretMotorRight().setIdleMode(IdleMode.kCoast);
     RobotContainer.m_DriveTrain.getleftmotor1().setIdleMode(IdleMode.kCoast);

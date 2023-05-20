@@ -19,15 +19,14 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.ArmCommands.ManualArmExtend;
 import frc.robot.commands.ArmCommands.ManualArmLift;
-import frc.robot.commands.ClawCommands.ManualClaw;
 import frc.robot.commands.DriveTrainCommands.ArcadeDrive;
+import frc.robot.commands.IntakeCommands.ManualIntake;
 import frc.robot.commands.SetPoints.Home;
 import frc.robot.commands.TurretCommands.ManualTurretSpin;
-import frc.robot.commands.VisionCommands.GamePieceTraking;
 import frc.robot.commands.VisionCommands.TurnToTarget;
 import frc.robot.subsystems.ArmExtend;
 import frc.robot.subsystems.ArmLift;
-import frc.robot.subsystems.Claw;
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Turret;
@@ -43,7 +42,7 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   public final static DriveTrain m_DriveTrain = new DriveTrain();
   public final static Turret m_Turret = new Turret();
-  public final static Claw m_Claw = new Claw();
+  public final static Intake m_Intake = new Intake();
   public final static ArmLift m_ArmLift = new ArmLift();
   public final static ArmExtend m_ArmExtend = new ArmExtend();
   public final static ButtonBind m_ButtonBind = new ButtonBind();
@@ -133,8 +132,8 @@ public class RobotContainer {
     m_ButtonBind.auxLeftBumper.whileTrue(new ManualTurretSpin(-.3));
 
     //claw
-    m_ButtonBind.auxXButton.whileTrue(new ManualClaw(true));
-    m_ButtonBind.auxAButton.whileTrue(new ManualClaw(false));
+    m_ButtonBind.auxXButton.whileTrue(new ManualIntake(true));
+    m_ButtonBind.auxAButton.whileTrue(new ManualIntake(false));
 
     //setpoints
     m_ButtonBind.auxBButton.onTrue(new Home());

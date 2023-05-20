@@ -11,14 +11,13 @@ public class TurnToTarget extends CommandBase {
 
   private double speed;
 
-  /** Creates a new TurnToTarget. 
-   * @param setSpeed the speed should always be positive and dictates how fast the robot will turn
-   * 
-  */
+  
+
+  /** Creates a new TurnToTarget. */
   public TurnToTarget(double setSpeed) {
+   
 
-    speed = setSpeed;
-
+    speed =  setSpeed;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.m_DriveTrain);
   }
@@ -30,13 +29,13 @@ public class TurnToTarget extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
     if(RobotContainer.tx.get() < -3) {
       RobotContainer.m_DriveTrain.arcadeDrive(0, speed);
+      //turn right
     }
-
     else if(RobotContainer.tx.get() > 3) {
-      RobotContainer.m_DriveTrain.arcadeDrive(0, -speed);
+      RobotContainer.m_DriveTrain.arcadeDrive(0, speed);
+      //turn left
     }
 
   }
