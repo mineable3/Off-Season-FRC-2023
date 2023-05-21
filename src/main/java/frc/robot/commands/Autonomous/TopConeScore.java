@@ -5,10 +5,9 @@
 package frc.robot.commands.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.ArmCommands.ArmEncoderExtend;
-import frc.robot.commands.ArmCommands.ArmEncoderLift;
-import frc.robot.commands.IntakeCommands.IntakeToSetPoint;
-import frc.robot.commands.TurretCommands.TurretToSetPoint;
+import frc.robot.commands.IntakeCommands.ManualIntake;
+import frc.robot.commands.SetPoints.DropHigh;
+import frc.robot.commands.SetPoints.Home;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -18,11 +17,10 @@ public class TopConeScore extends SequentialCommandGroup {
   public TopConeScore() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
+    
     addCommands(
-      new TurretToSetPoint(-1),
-      new ArmEncoderLift(5),
-      new ArmEncoderExtend(5),
-      new IntakeToSetPoint(3),
-      new TurretToSetPoint(0));
+      new DropHigh(),
+      new ManualIntake(true).withTimeout(.5),//spit the gamepiece out
+      new Home());//return to the original position for the start of teleop
   }
 }

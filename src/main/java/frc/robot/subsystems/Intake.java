@@ -11,43 +11,39 @@ import frc.robot.Constants;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Intake extends SubsystemBase {
-  /** Creates a new Claw. */
-  private CANSparkMax clawMotor;
+  /** Creates a new Intake. */
+  private CANSparkMax intakeMotor;
 
   public Intake() {
 
     //the motor that runs the intake wheels
-    clawMotor = new CANSparkMax(Constants.clawMotorID, MotorType.kBrushless);
-
-    resetclawTurretEncoder();
+    intakeMotor = new CANSparkMax(Constants.intakeMotorID, MotorType.kBrushless);
   }
 
-  //primary way to move the claw
-  public void setClaw(double speed) {
-    clawMotor.setIdleMode(IdleMode.kCoast);
-    clawMotor.set(speed);
+  //primary way to move the intake
+  public void setIntake(double speed) {
+    intakeMotor.setIdleMode(IdleMode.kCoast);
+    intakeMotor.set(speed);
   }
 
   
-  //stopping all claw movement
-  public void stopClaw() {
-    clawMotor.set(0);
-    clawMotor.setIdleMode(IdleMode.kBrake);
+  //stopping all intake movement
+  public void stopIntake() {
+    intakeMotor.set(0);
+    intakeMotor.setIdleMode(IdleMode.kBrake);
+  }
+
+  public double getIntakeEncoder() {
+    return intakeMotor.getEncoder().getPosition();
+  }
+
+  public void setIntakeEncoder(double setPosition) {
+    intakeMotor.getEncoder().setPosition(setPosition);
   }
 
 
-  //Encoder methods
-  public double getclawTurretEncoder(){
-    return clawMotor.getEncoder().getPosition();
-  }
-
-  public void resetclawTurretEncoder() {
-    clawMotor.getEncoder().setPosition(0);
-  }
-
-
-  public CANSparkMax getClawMotor() {
-    return clawMotor;
+  public CANSparkMax getIntakeMotor() {
+    return intakeMotor;
   }
 
   @Override

@@ -5,11 +5,7 @@
 package frc.robot.commands.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.ArmCommands.ArmEncoderLift;
 import frc.robot.commands.DriveTrainCommands.MoveForDistance;
-import frc.robot.commands.IntakeCommands.IntakeToSetPoint;
-import frc.robot.commands.TurretCommands.TurretToSetPoint;
-import frc.robot.subsystems.ArmExtend;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -21,12 +17,8 @@ public class LevelingSystem extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
 
     addCommands(
-     new frc.robot.commands.ArmCommands.ArmEncoderExtend(0),
-     new IntakeToSetPoint(0),
-     new TurretToSetPoint(0),
-     new ArmEncoderLift(0),
-     new MoveForDistance(13),
-     new MoveForDistance(-13));
+     new MoveForDistance(26),//getting the points for leaving the community
+     new MoveForDistance(13));//the actual balancing
 
   }
 }

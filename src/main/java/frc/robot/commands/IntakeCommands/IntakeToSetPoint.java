@@ -34,9 +34,9 @@ public class IntakeToSetPoint extends CommandBase {
   public void execute() {
 
     if (amountToClose > 0) {
-      RobotContainer.m_Intake.setClaw(.8);
+      RobotContainer.m_Intake.setIntake(.8);
     } else {
-      RobotContainer.m_Intake.setClaw(-.8);   
+      RobotContainer.m_Intake.setIntake(-.8);   
     }
   }
   
@@ -44,7 +44,7 @@ public class IntakeToSetPoint extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_Intake.stopClaw();
+    RobotContainer.m_Intake.stopIntake();
   }
 
 
@@ -54,7 +54,7 @@ public class IntakeToSetPoint extends CommandBase {
   @Override
   public boolean isFinished() {
 
-    if (Math.round(RobotContainer.m_Intake.getclawTurretEncoder()) == amountToClose) {
+    if (Math.round(RobotContainer.m_Intake.getIntakeEncoder()) == amountToClose) {
       return true;
     } else {
       return false;

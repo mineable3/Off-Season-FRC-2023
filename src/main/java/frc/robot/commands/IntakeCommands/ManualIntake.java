@@ -10,13 +10,13 @@ import frc.robot.RobotContainer;
 public class ManualIntake extends CommandBase {
   /** Creates a new ManualIntake. */
 
-  boolean setGrab;
+  boolean setRollOut;
 
-  public ManualIntake(boolean grab) {
+  public ManualIntake(boolean rollOut) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.m_Intake);
 
-    setGrab = grab;
+    setRollOut = rollOut;
   }
 
   // Called when the command is initially scheduled.
@@ -26,17 +26,17 @@ public class ManualIntake extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(setGrab) {
-      RobotContainer.m_Intake.setClaw(.8);
+    if(setRollOut) {
+      RobotContainer.m_Intake.setIntake(.8);
     } else {
-      RobotContainer.m_Intake.setClaw(-.8);
+      RobotContainer.m_Intake.setIntake(-.8);
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_Intake.stopClaw();
+    RobotContainer.m_Intake.stopIntake();
   }
 
   // Returns true when the command should end.
