@@ -9,6 +9,7 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMax.SoftLimitDirection;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -20,7 +21,7 @@ public class ArmExtend extends SubsystemBase {
   public ArmExtend() {
     armExtendMotor = new CANSparkMax(Constants.armExtendMotorID, MotorType.kBrushless);
 
-    armExtendMotor.setSoftLimit(SoftLimitDirection.kForward, 25);
+    armExtendMotor.setSoftLimit(SoftLimitDirection.kForward, 100);
     armExtendMotor.setSoftLimit(SoftLimitDirection.kReverse, 0);
     armExtendMotor.enableSoftLimit(SoftLimitDirection.kForward,true);
     armExtendMotor.enableSoftLimit(SoftLimitDirection.kReverse, true);
@@ -52,5 +53,12 @@ public class ArmExtend extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+
+    NetworkTableInstance.getDefault()
+    .getTable("Shuffleboard")
+    .getSubTable("Main")
+    .getEntry("Arm Extend encoder")
+    .setNumber(Math.round(getArmExtendEncoder()));
+
   }
 }

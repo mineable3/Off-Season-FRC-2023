@@ -10,6 +10,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 
 import frc.robot.Constants;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -28,12 +29,12 @@ public class ArmLift extends SubsystemBase {
    armHeight = new MotorControllerGroup(armHeightMotor1, armHeightMotor2);
 
    //the arm motor number limit will be a place holder for the time being
-   armHeightMotor1.setSoftLimit(SoftLimitDirection.kForward, 25);
+   armHeightMotor1.setSoftLimit(SoftLimitDirection.kForward, 44);
    armHeightMotor1.setSoftLimit(SoftLimitDirection.kReverse, 0);
    armHeightMotor1.enableSoftLimit(SoftLimitDirection.kForward,true);
    armHeightMotor1.enableSoftLimit(SoftLimitDirection.kReverse, true);
 
-   armHeightMotor2.setSoftLimit(SoftLimitDirection.kForward, 25);
+   armHeightMotor2.setSoftLimit(SoftLimitDirection.kForward, 44);
    armHeightMotor2.setSoftLimit(SoftLimitDirection.kReverse, 0);
    armHeightMotor2.enableSoftLimit(SoftLimitDirection.kForward,true);
    armHeightMotor2.enableSoftLimit(SoftLimitDirection.kReverse, true);
@@ -93,4 +94,15 @@ public CANSparkMax getArmHeightMotor2() {
   }
 
 
+  @Override
+  public void periodic () {
+    NetworkTableInstance.getDefault()
+    .getTable("Shuffleboard")
+    .getSubTable("Main")
+    .getEntry("Arm lift encoder")
+    .setNumber(Math.round(getArmHeightEncoder()));
+
+
+  }
+  
 }
