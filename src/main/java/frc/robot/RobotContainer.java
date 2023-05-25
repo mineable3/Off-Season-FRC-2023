@@ -50,39 +50,34 @@ public class RobotContainer {
   public static AtomicReference<Double> tv = new AtomicReference<Double>();
   public static AtomicReference<Double> tx = new AtomicReference<Double>();
   public static AtomicReference<Double> ty = new AtomicReference<Double>();
-  public static AtomicReference<Double> ta = new AtomicReference<Double>();
-  public static AtomicReference<Double> tl = new AtomicReference<Double>();
-  public static AtomicReference<Double> cl = new AtomicReference<Double>();
-  public static AtomicReference<Double> tshort = new AtomicReference<Double>();
-  public static AtomicReference<Double> tlong = new AtomicReference<Double>();
-  public static AtomicReference<Double> thor = new AtomicReference<Double>();
-  public static AtomicReference<Double> tvert = new AtomicReference<Double>();
   public static AtomicReference<Double> tid = new AtomicReference<Double>();
 
   private DoubleTopic dlbTopic_tv;
   private DoubleTopic dlbTopic_tx;
   private DoubleTopic dlbTopic_ty;
-  private DoubleTopic dlbTopic_ta;
-  private DoubleTopic dlbTopic_tl;
-  private DoubleTopic dlbTopic_cl;
-  private DoubleTopic dlbTopic_tshort;
-  private DoubleTopic dlbTopic_tlong;
-  private DoubleTopic dlbTopic_thor;
-  private DoubleTopic dlbTopic_tvert;
   private DoubleTopic dlbTopic_tid;
 
 
   public double tvHandle; //Whether the limelight has any valid targets (0 or 1)
   public double txHandle; //Horizontal Offset From Crosshair To Target (LL1: -27 degrees to 27 degrees | LL2: -29.8 to 29.8 degrees)
   public double tyHandle; //Vertical Offset From Crosshair To Target (LL1: -20.5 degrees to 20.5 degrees | LL2: -24.85 to 24.85 degrees)
-  public double taHandle; //Target Area (0% of image to 100% of image)
-  public double tlHandle; //The pipeline’s latency contribution (ms). Add to “cl” to get total latency.
-  public double clHandle; //Capture pipeline latency (ms). Time between the end of the exposure of the middle row of the sensor to the beginning of the tracking pipeline.
-  public double tshortHandle; //Sidelength of shortest side of the fitted bounding box (pixels)
-  public double tlongHandle; //Sidelength of longest side of the fitted bounding box (pixels)
-  public double thorHandle; //Horizontal sidelength of the rough bounding box (0 - 320 pixels)
-  public double tvertHandle; //Vertical sidelength of the rough bounding box (0 - 320 pixels)
   public double tidHandle; //ID of the primary in-view AprilTag
+
+  public static AtomicReference<Double> intaketv = new AtomicReference<Double>();
+  public static AtomicReference<Double> intaketx = new AtomicReference<Double>();
+  public static AtomicReference<Double> intakety = new AtomicReference<Double>();
+  public static AtomicReference<Double> intaketid = new AtomicReference<Double>();
+
+  private DoubleTopic intakeDlbTopic_tv;
+  private DoubleTopic intakeDlbTopic_tx;
+  private DoubleTopic intakeDlbTopic_ty;
+  private DoubleTopic intakeDlbTopic_tid;
+
+
+  public double intakeTvHandle; //Whether the limelight has any valid targets (0 or 1)
+  public double intakeTxHandle; //Horizontal Offset From Crosshair To Target (LL1: -27 degrees to 27 degrees | LL2: -29.8 to 29.8 degrees)
+  public double intakeTyHandle; //Vertical Offset From Crosshair To Target (LL1: -20.5 degrees to 20.5 degrees | LL2: -24.85 to 24.85 degrees)
+  public double intakeTidHandle; //ID of the primary in-view AprilTag
 
   SendableChooser<Command> autoChooser;
 
@@ -174,8 +169,9 @@ public class RobotContainer {
 
   private void configureNetworkTables(){
     NetworkTableInstance defaultNTinst = NetworkTableInstance.getDefault();
-    NetworkTable lime = defaultNTinst.getTable("limelight");
+    NetworkTable lime = defaultNTinst.getTable("limelight-aimming");
 
+    NetworkTable limeIntake = defaultNTinst.getTable("limelight-cargo");
     //NetworkTable lime = NetworkTableInstance.getDefault().getTable("limelight");
     //NetworkTableEntry tx = lime.getEntry("tx");
 
@@ -212,76 +208,6 @@ public class RobotContainer {
       }
      );
 
-     dlbTopic_ta = lime.getDoubleTopic("ta");
-
-     taHandle = defaultNTinst.addListener(
-      dlbTopic_ta,
-      EnumSet.of(NetworkTableEvent.Kind.kValueAll), 
-      event -> {
-        ta.set(event.valueData.value.getDouble());
-      }
-     );
-
-     dlbTopic_tl = lime.getDoubleTopic("tl");
-
-     tlHandle = defaultNTinst.addListener(
-      dlbTopic_tl,
-      EnumSet.of(NetworkTableEvent.Kind.kValueAll), 
-      event -> {
-        tl.set(event.valueData.value.getDouble());
-      }
-     );
-
-     dlbTopic_cl = lime.getDoubleTopic("cl");
-
-     clHandle = defaultNTinst.addListener(
-      dlbTopic_cl,
-      EnumSet.of(NetworkTableEvent.Kind.kValueAll), 
-      event -> {
-        cl.set(event.valueData.value.getDouble());
-      }
-     );
-
-     dlbTopic_tshort = lime.getDoubleTopic("tshort");
-
-     tshortHandle = defaultNTinst.addListener(
-      dlbTopic_tshort,
-      EnumSet.of(NetworkTableEvent.Kind.kValueAll), 
-      event -> {
-        tshort.set(event.valueData.value.getDouble());
-      }
-     );
-
-     dlbTopic_tlong = lime.getDoubleTopic("tlong");
-
-     tlongHandle = defaultNTinst.addListener(
-      dlbTopic_tlong,
-      EnumSet.of(NetworkTableEvent.Kind.kValueAll), 
-      event -> {
-        tlong.set(event.valueData.value.getDouble());
-      }
-     );
-
-     dlbTopic_thor = lime.getDoubleTopic("thor");
-
-     thorHandle = defaultNTinst.addListener(
-      dlbTopic_thor,
-      EnumSet.of(NetworkTableEvent.Kind.kValueAll), 
-      event -> {
-        thor.set(event.valueData.value.getDouble());
-      }
-     );
-
-     dlbTopic_tvert = lime.getDoubleTopic("tvert");
-
-     tvertHandle = defaultNTinst.addListener(
-      dlbTopic_tvert,
-      EnumSet.of(NetworkTableEvent.Kind.kValueAll), 
-      event -> {
-        tvert.set(event.valueData.value.getDouble());
-      }
-     );
-
      dlbTopic_tid = lime.getDoubleTopic("tid");
 
      tidHandle = defaultNTinst.addListener(
@@ -289,6 +215,49 @@ public class RobotContainer {
       EnumSet.of(NetworkTableEvent.Kind.kValueAll), 
       event -> {
         tid.set(event.valueData.value.getDouble());
+      }
+     );
+
+
+
+     intakeDlbTopic_tv = limeIntake.getDoubleTopic("tv");
+
+     intakeTvHandle = defaultNTinst.addListener(
+      intakeDlbTopic_tv,
+      EnumSet.of(NetworkTableEvent.Kind.kValueAll), 
+      event -> {
+        intaketv.set(event.valueData.value.getDouble());
+      }
+     );
+
+    intakeDlbTopic_tx = limeIntake.getDoubleTopic("tx");
+
+    intakeTxHandle = defaultNTinst.addListener(
+      intakeDlbTopic_tx,
+      EnumSet.of(NetworkTableEvent.Kind.kValueAll), 
+      event -> {
+        intaketx.set(event.valueData.value.getDouble());
+      }
+    );
+
+
+     intakeDlbTopic_ty = limeIntake.getDoubleTopic("ty");
+
+     intakeTyHandle = defaultNTinst.addListener(
+      intakeDlbTopic_ty,
+      EnumSet.of(NetworkTableEvent.Kind.kValueAll), 
+      event -> {
+        intakety.set(event.valueData.value.getDouble());
+      }
+     );
+
+     intakeDlbTopic_tid = limeIntake.getDoubleTopic("tid");
+
+     intakeTidHandle = defaultNTinst.addListener(
+      intakeDlbTopic_tid,
+      EnumSet.of(NetworkTableEvent.Kind.kValueAll), 
+      event -> {
+        intaketid.set(event.valueData.value.getDouble());
       }
      );
 
