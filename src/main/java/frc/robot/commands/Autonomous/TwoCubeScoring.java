@@ -7,13 +7,11 @@ package frc.robot.commands.Autonomous;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.ArmCommands.ArmEncoderExtend;
-import frc.robot.commands.ArmCommands.ArmEncoderLift;
 import frc.robot.commands.DriveTrainCommands.MoveForDistance;
 import frc.robot.commands.IntakeCommands.ManualIntake;
+import frc.robot.commands.SetPoints.DropMid;
 import frc.robot.commands.SetPoints.GroundPickup;
 import frc.robot.commands.SetPoints.Home;
-import frc.robot.commands.TurretCommands.TurretToSetPoint;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -35,10 +33,7 @@ public class TwoCubeScoring extends SequentialCommandGroup {
       
       new ParallelCommandGroup(
         new MoveForDistance(-7),//find values
-
-        new TurretToSetPoint(180),//find values
-        new ArmEncoderLift(5),//find values
-        new ArmEncoderExtend(5)//find values
+        new DropMid()
       ),
 
       new ManualIntake(true).withTimeout(.3),//dropping the gamepiece

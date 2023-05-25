@@ -19,7 +19,7 @@ public class DropMid extends ParallelCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new TurretToSetPoint(0),
-      new ArmEncoderExtend(43),//Find the actual encoder value
-      new ArmEncoderLift(21));//Find the actual encoder value);
+      new ArmEncoderExtend(43),
+      new ArmEncoderLift(21));
   }
 }

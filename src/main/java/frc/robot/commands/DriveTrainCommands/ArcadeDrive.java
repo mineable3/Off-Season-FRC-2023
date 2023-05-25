@@ -4,7 +4,6 @@
 
 package frc.robot.commands.DriveTrainCommands;
 
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
@@ -20,7 +19,6 @@ public class ArcadeDrive extends CommandBase {
   @Override
   public void initialize() {
     RobotContainer.m_DriveTrain.resetEncoders();
-    System.out.println("hello world");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -34,11 +32,7 @@ public class ArcadeDrive extends CommandBase {
     rotation *= Constants.driveSpeedMultiplier;
 
     RobotContainer.m_DriveTrain.arcadeDrive(speed, rotation);
-    
-    //System.out.println("Turret encoder:  " + RobotContainer.m_Turret.getTurretEncoder());
-    //System.out.println("Arm Enconder: " + RobotContainer.m_ArmExtend.getArmExtendEncoder());
-    //System.out.println("Arm Height: " + RobotContainer.m_ArmLift.getArmHeightEncoder());
-    
+        
   }
 
   // Called once the command ends or is interrupted.
