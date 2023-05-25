@@ -26,7 +26,9 @@ public class ManualArmLift extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.m_ArmLift.setArmHeight(speed);
+
+    //it's negative because of the motor direction
+    RobotContainer.m_ArmLift.setArmHeight(-speed);
   }
 
   // Called once the command ends or is interrupted.

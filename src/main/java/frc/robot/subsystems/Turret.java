@@ -9,6 +9,7 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMax.SoftLimitDirection;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -25,13 +26,13 @@ public class Turret extends SubsystemBase {
 
     //setting limits
     //CHANGE LIMITS WHEN THE ROBOT IS DONE, THE 10'S ARE JUST PLACE HOLDERS
-    turretMotorLeft.setSoftLimit(SoftLimitDirection.kForward, 10);
-    turretMotorLeft.setSoftLimit(SoftLimitDirection.kReverse, -10);
+    turretMotorLeft.setSoftLimit(SoftLimitDirection.kForward, 40);
+    turretMotorLeft.setSoftLimit(SoftLimitDirection.kReverse, -40);
     turretMotorLeft.enableSoftLimit(SoftLimitDirection.kForward, true);
     turretMotorLeft.enableSoftLimit(SoftLimitDirection.kReverse, true);
 
-    turretMotorRight.setSoftLimit(SoftLimitDirection.kForward, 10);
-    turretMotorRight.setSoftLimit(SoftLimitDirection.kReverse, -10);
+    turretMotorRight.setSoftLimit(SoftLimitDirection.kForward, 40);
+    turretMotorRight.setSoftLimit(SoftLimitDirection.kReverse, -40);
     turretMotorRight.enableSoftLimit(SoftLimitDirection.kForward, true);
     turretMotorRight.enableSoftLimit(SoftLimitDirection.kReverse, true);
   }
@@ -96,5 +97,11 @@ public class Turret extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    NetworkTableInstance.getDefault()
+    .getTable("Shuffleboard")
+    .getSubTable("Main")
+    .getEntry("Turret encoder")
+    .setNumber(Math.round(getTurretEncoder()));
+
   }
 }

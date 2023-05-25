@@ -19,7 +19,7 @@ public class DropHigh extends ParallelCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new TurretToSetPoint(0),
-      new ArmEncoderExtend(0),//Find the actual encoder value
-      new ArmEncoderLift(0));//Find the actual encoder value);
+      new ArmEncoderExtend(83),//Find the actual encoder value
+      new ArmEncoderLift(31));//Find the actual encoder value);
   }
 }
