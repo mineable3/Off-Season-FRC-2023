@@ -106,6 +106,10 @@ public class DriveTrain extends SubsystemBase {
     differentialDrive.tankDrive(leftSpeed, rightSpeed);
   }
 
+  public void gtaDrive(double speed, double curveSpeed, boolean turnInPlace) {
+    differentialDrive.curvatureDrive(speed, curveSpeed, turnInPlace);
+  }
+
   public CANSparkMax getleftmotor1() {
     return leftmotor1;
   }

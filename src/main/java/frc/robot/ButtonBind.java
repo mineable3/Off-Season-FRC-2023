@@ -2,6 +2,7 @@ package frc.robot;
 
 
 
+import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -11,7 +12,7 @@ public class ButtonBind{
 
     //controllers
     private final static CommandXboxController driverController = new CommandXboxController(0);
-    private final static CommandXboxController auxController = new CommandXboxController(1);
+    private final static CommandGenericHID auxController = new CommandGenericHID(1);
     
 
     //Constructor method
@@ -87,10 +88,10 @@ public class ButtonBind{
 
 
     //===================Driver Triggers==========================
-    public final double driverLeftTrigger = auxController.getLeftTriggerAxis();
-    public final double driverRightTrigger = auxController.getRightTriggerAxis();
-    public final Trigger driverRightTriggerButton = auxController.rightTrigger();
-    public final Trigger driverLeftTriggerButton = auxController.leftTrigger();
+    public final double driverLeftTrigger = driverController.getLeftTriggerAxis();
+    public final double driverRightTrigger = driverController.getRightTriggerAxis();
+    public final Trigger driverRightTriggerButton = driverController.rightTrigger();
+    public final Trigger driverLeftTriggerButton = driverController.leftTrigger();
 
 
     public double getDriverLeftTrigger(){
@@ -131,12 +132,12 @@ public class ButtonBind{
 
 //=============================Aux buttons and bumpers========================
 
-    public final Trigger auxAButton = auxController.a();
-    public final Trigger auxBButton = auxController.b();
-    public final Trigger auxXButton = auxController.x();
-    public final Trigger auxYButton = auxController.y();
-    public final Trigger auxLeftBumper = auxController.leftBumper();
-    public final Trigger auxRightBumper = auxController.rightBumper();
+    public final Trigger auxAButton = auxController.button(2);//a
+    public final Trigger auxBButton = auxController.button(3);//B
+    public final Trigger auxXButton = auxController.button(1);//X
+    public final Trigger auxYButton = auxController.button(4);//Y
+    public final Trigger auxLeftBumper = auxController.button(5);
+    public final Trigger auxRightBumper = auxController.button(6);
 
 
 
@@ -164,36 +165,37 @@ public class ButtonBind{
 
     
     //public final Trigger auxLeftJoystickTrigger = auxController.axisGreaterThan(1, .5);
-    public final double auxleftY = auxController.getLeftY();
-    public final double auxleftX = auxController.getLeftX();
-    public final Trigger auxrightJoystickYup = auxController.axisGreaterThan(1, .4);
-    public final Trigger auxrightJoystickYdown = auxController.axisLessThan(1, -.4);
-    public final Trigger auxleftJoystickYup = auxController.axisGreaterThan(5, .4);
-    public final Trigger auxleftJoystickYdown = auxController.axisLessThan(5, -.4);
-    public final double auxrightY = auxController.getRightY();
-    public final double auxrightX = auxController.getRightX();
+    public final double auxleftY = auxController.getRawAxis(1);
+    public final double auxleftX = auxController.getRawAxis(0);
+    public final Trigger auxrightJoystickYup = auxController.axisGreaterThan(1, -.4);
+    public final Trigger auxrightJoystickYdown = auxController.axisLessThan(1, .4);
+    public final Trigger auxleftJoystickYup = auxController.axisGreaterThan(1, .4);
+    public final Trigger auxleftJoystickYdown = auxController.axisLessThan(1, -.4);
+    //public final double auxrightY = auxController.getRightY();
+    //public final double auxrightX = auxController.getRightX();
 
-    public boolean getAuxLeftJoystick(){
-        return auxController.leftStick().getAsBoolean();
-    }
+    //public boolean getAuxLeftJoystick(){
+    //    return auxleftX;
+    //}
 
     public double getAuxLeftX(){
-        return auxController.getLeftX();
+        return auxleftX;
     }
     public double getAuxLeftY(){
-        return auxController.getLeftY();
+        return auxleftY;
     }
-    public boolean getAuxrightJoystick(){
-        return auxController.rightStick().getAsBoolean();
-    }
-    public double getAuxrightY(){
-        return auxController.getRightY();
-    }
-    public double getAuxrightX(){
-        return auxController.getRightX();
-    }
+    //public boolean getAuxrightJoystick(){
+    //    return auxController.rightStick().getAsBoolean();
+    //}
+    //public double getAuxrightY(){
+    //    return auxController.getRightY();
+    //}
+    //public double getAuxrightX(){
+    //    return auxController.getRightX();
+    //}
 
 //===================Aux Triggers==========================
+/* 
     public final double auxLeftTrigger = auxController.getLeftTriggerAxis();
     public final double auxRightTrigger = auxController.getRightTriggerAxis();
     public final Trigger auxRightTriggerButton = auxController.rightTrigger();
@@ -211,8 +213,20 @@ public class ButtonBind{
     }
     public Trigger getAuxLeftTriggerButton(){
         return auxLeftTriggerButton;
-    }
+    }*/
 
+    public final Trigger buttonOne =  auxController.button(1);
+    public final Trigger buttonTwo =  auxController.button(2);
+    public final Trigger buttonThree =  auxController.button(3);
+    public final Trigger buttonFour =  auxController.button(4);
+    public final Trigger buttonFive =  auxController.button(5);
+    public final Trigger buttonSix =  auxController.button(6);
+    public final Trigger buttonSeven =  auxController.button(7);
+    public final Trigger buttonEight =  auxController.button(8);
+  
+    public final double auxControllerX = auxController.getRawAxis(0);
+    public final double auxControllerY = auxController.getRawAxis(1);
+    
 
 //=======================Aux DPad============================
 

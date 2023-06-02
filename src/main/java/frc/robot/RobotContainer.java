@@ -133,23 +133,23 @@ public class RobotContainer {
     m_ButtonBind.auxLeftBumper.whileTrue(new ManualTurretSpin(-.3));
 
     //claw
-    m_ButtonBind.auxXButton.whileTrue(new ManualIntake(true));
+    m_ButtonBind.auxBButton.whileTrue(new ManualIntake(true));
     m_ButtonBind.auxAButton.whileTrue(new ManualIntake(false));
 
     //setpoints
-    m_ButtonBind.auxBButton.onTrue(new Home());
+    m_ButtonBind.buttonSeven.onTrue(new Home());
 
     //vision
-    m_ButtonBind.auxYButton.whileTrue(new TurnToTarget(.3));
+    //m_ButtonBind.auxYButton.whileTrue(new TurnToTarget(.3));
 
     //arm lift
-    m_ButtonBind.auxrightJoystickYup.whileTrue(new ManualArmLift(.6));
-    m_ButtonBind.auxrightJoystickYdown.whileTrue(new ManualArmLift(-.6));
+    m_ButtonBind.auxleftJoystickYdown.whileTrue(new ManualArmLift(-.3));
+    m_ButtonBind.auxleftJoystickYup.whileTrue(new ManualArmLift(.3));
     
     //arm extend
     
-    m_ButtonBind.auxleftJoystickYup.whileTrue(new ManualArmExtend(.6));
-    m_ButtonBind.auxleftJoystickYdown.whileTrue(new ManualArmExtend(-.6));
+    m_ButtonBind.auxXButton.whileTrue(new ManualArmExtend(.6));
+    m_ButtonBind.auxYButton.whileTrue(new ManualArmExtend(-.6));
     
   }
 
@@ -306,6 +306,13 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
+    //autoChooser.addOption();
+    //autoChooser.addOption();
+    //autoChooser.addOption();
+    //autoChooser.addOption();
+
+
+
     // An example command will be run in autonomous
     return autoChooser.getSelected();
   }
