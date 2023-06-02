@@ -2,44 +2,52 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.DriveTrainCommands;
+package frc.robot.commands.VisionCommands;
+
+import java.util.concurrent.atomic.AtomicReference;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
-public class ArcadeDrive extends CommandBase {
-  /** Creates a new ArcadeDrive. */
-  public ArcadeDrive() {
+public class RunForTarget extends CommandBase {
+
+  AtomicReference<Double> horizontalOffset;
+  double forwardSpeed, xSteer, xOffset;
+
+
+  /** Creates a new RunForTarget. */
+  public RunForTarget(AtomicReference<Double> inTx, double inForwardSpeed) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.m_DriveTrain);
+
+    horizontalOffset = inTx;
+    forwardSpeed = inForwardSpeed;
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    RobotContainer.m_DriveTrain.resetEncoders();
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
 
-    double speed = RobotContainer.m_ButtonBind.getDriverLeftY();
-    double rotation = RobotContainer.m_ButtonBind.getDriverRightX();
+    xOffset = horizontalOffset.get();
 
-    speed *= Constants.driveSpeedMultiplier;
-    rotation *= Constants.driveSpeedMultiplier;
+    if(Math.abs(horizontalOffset.get()) > 0.2) {
+      xOffset *= 0.015;
+      xOffset *= 0.0015;
+    }
+    
 
-    RobotContainer.m_DriveTrain.arcadeDrive(speed, rotation);
-        
+
+    RobotContainer.m_DriveTrain.arcadeDrive(forwardSpeed, xSteer * -1000 * 1.65);
+
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    RobotContainer.m_DriveTrain.arcadeDrive(0, 0);
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

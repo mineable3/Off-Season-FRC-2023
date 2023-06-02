@@ -16,6 +16,7 @@ public class LevelingSystem extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
 
+    //encoder values are just filler
     addCommands(
      new MoveForDistance(26),//getting the points for leaving the community
      new MoveForDistance(13));//the actual balancing

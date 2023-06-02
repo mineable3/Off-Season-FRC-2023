@@ -19,7 +19,7 @@ public class GroundPickup extends ParallelCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new TurretToSetPoint(0),
-      new ArmEncoderExtend(93),//Find the actual encoder value
-      new ArmEncoderLift(7));//Find the actual encoder value
+      new ArmEncoderExtend(93),
+      new ArmEncoderLift(7));
   }
 }
