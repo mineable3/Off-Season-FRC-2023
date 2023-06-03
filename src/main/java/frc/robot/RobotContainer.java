@@ -19,7 +19,11 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.ArmCommands.ManualArmExtend;
 import frc.robot.commands.ArmCommands.ManualArmLift;
-import frc.robot.commands.DriveTrainCommands.ArcadeDrive;
+import frc.robot.commands.Autonomous.LevelingSystem;
+import frc.robot.commands.Autonomous.TopCubeScore;
+import frc.robot.commands.Autonomous.TwoCubeScoring;
+import frc.robot.commands.DriveTrainCommands.GTADrive;
+import frc.robot.commands.DriveTrainCommands.MoveForDistance;
 import frc.robot.commands.IntakeCommands.ManualIntake;
 import frc.robot.commands.SetPoints.Home;
 import frc.robot.commands.TurretCommands.ManualTurretSpin;
@@ -110,17 +114,8 @@ public class RobotContainer {
     new Trigger(m_exampleSubsystem::exampleCondition)
         .onTrue(new ExampleCommand(m_exampleSubsystem));
 
-    m_DriveTrain.setDefaultCommand(new ArcadeDrive());
+    m_DriveTrain.setDefaultCommand(new GTADrive());
     
-
-    
-   //// m_ButtonBind.driverBButton.whileTrue(new TurnToAngle(0));
-   // m_ButtonBind.driverAButton.whileTrue(new PIDChargingStation());
-    
-    /*aux will also 
-    rightJoystick: arm
-    leftJoystick: claw turret
-    */
 
     //turret
     m_ButtonBind.auxRightBumper.whileTrue(new ManualTurretSpin(.3));
@@ -153,9 +148,11 @@ public class RobotContainer {
     private void configureShuffleBoard() {
       autoChooser = new SendableChooser<Command>();
 
-      //autoChooser.setDefaultOption("name", new autoCommand());
+      autoChooser.setDefaultOption("One cube", new TopCubeScore());
 
-      //autonomousChooser.addOption("different name", new alternateAutoCommand());
+      autoChooser.addOption("Two Cube", new TwoCubeScoring());
+      autoChooser.addOption("Charging station", new LevelingSystem());
+      autoChooser.addOption("Only move", new MoveForDistance(4));
 
       Shuffleboard.getTab("Main").add(autoChooser);
     }
@@ -274,12 +271,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    //autoChooser.addOption();
-    //autoChooser.addOption();
-    //autoChooser.addOption();
-    //autoChooser.addOption();
-
-
 
     // An example command will be run in autonomous
     return autoChooser.getSelected();

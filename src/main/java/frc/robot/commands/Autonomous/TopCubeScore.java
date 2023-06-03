@@ -5,6 +5,7 @@
 package frc.robot.commands.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.DriveTrainCommands.MoveForDistance;
 import frc.robot.commands.IntakeCommands.ManualIntake;
 import frc.robot.commands.SetPoints.DropHigh;
 import frc.robot.commands.SetPoints.Home;
@@ -21,6 +22,7 @@ public class TopCubeScore extends SequentialCommandGroup {
     addCommands(
       new DropHigh(),
       new ManualIntake(true).withTimeout(.5),//spit the gamepiece out
-      new Home());//return to the original position for the start of teleop
+      new Home(),//return to the original position for the start of teleop
+      new MoveForDistance(5));
   }
 }

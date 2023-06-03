@@ -9,9 +9,14 @@ import frc.robot.RobotContainer;
 
 public class GTADrive extends CommandBase {
   /** Creates a new GTADrive. */
+
+  double backSpeed, forwardSpeed, netSpeed, curve;
+  boolean turnInPlace;
+
   public GTADrive() {
     // Use addRequirements() here to declare subsystem dependencies.
   
+    addRequirements(RobotContainer.m_DriveTrain);
   }
 
   // Called when the command is initially scheduled.
@@ -20,7 +25,19 @@ public class GTADrive extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+
+
+    backSpeed = RobotContainer.m_ButtonBind.driverRightTrigger;
+    forwardSpeed = RobotContainer.m_ButtonBind.driverLeftTrigger;
+    curve = RobotContainer.m_ButtonBind.leftAxisX;
+    turnInPlace = RobotContainer.m_ButtonBind.getDriverRightBumper();
+
+    netSpeed = backSpeed + forwardSpeed;
+
+
+    RobotContainer.m_DriveTrain.gtaDrive(netSpeed, curve, turnInPlace);
+  }
 
   // Called once the command ends or is interrupted.
   @Override

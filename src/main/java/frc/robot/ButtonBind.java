@@ -54,12 +54,12 @@ public class ButtonBind{
 
 
 //=============================Driver Joysticks====================
-    public final Trigger ContollerLeftJoystick = driverController.leftStick();
-    public final double LeftaxisY = driverController.getLeftY();
-    public final double LeftaxisX = driverController.getLeftX();
-    public final Trigger ControllerRightJoystick = driverController.rightStick(); 
-    public final double RightaxisY = driverController.getRightY();
-    public final double RightaxisX =  driverController.getRightX();
+    public final Trigger contollerLeftJoystick = driverController.leftStick();
+    public final double leftAxisY = driverController.getLeftY();
+    public final double leftAxisX = driverController.getLeftX();
+    public final Trigger controllerRightJoystick = driverController.rightStick(); 
+    public final double rightAxisY = driverController.getRightY();
+    public final double rightAxisX =  driverController.getRightX();
 
 
     public boolean getDriverLeftJoystick(){
