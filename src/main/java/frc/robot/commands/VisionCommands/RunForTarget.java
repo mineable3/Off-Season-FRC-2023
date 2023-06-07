@@ -7,22 +7,25 @@ package frc.robot.commands.VisionCommands;
 import java.util.concurrent.atomic.AtomicReference;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
 public class RunForTarget extends CommandBase {
+  /** Creates a new RunForTag. */
 
-  AtomicReference<Double> horizontalOffset;
-  double forwardSpeed, xSteer, xOffset;
+  private double steerScale = Constants.visionConstant;
+  private double adjustSteer = 0;
+  private double speedSet, xSteer; 
+  private AtomicReference<Double> xSteerSup;
 
 
-  /** Creates a new RunForTarget. */
-  public RunForTarget(AtomicReference<Double> inTx, double inForwardSpeed) {
-    // Use addRequirements() here to declare subsystem dependencies.
+  public RunForTarget(double speed, AtomicReference <Double> xSteering) {
+
     addRequirements(RobotContainer.m_DriveTrain);
-
-    horizontalOffset = inTx;
-    forwardSpeed = inForwardSpeed;
-  }
+    speedSet = speed;
+    xSteerSup = xSteering;
+    xSteer = xSteerSup.get();
+    }
 
   // Called when the command is initially scheduled.
   @Override
@@ -32,17 +35,18 @@ public class RunForTarget extends CommandBase {
   @Override
   public void execute() {
 
-    xOffset = horizontalOffset.get();
-
-    if(Math.abs(horizontalOffset.get()) > 0.2) {
-      xOffset *= 0.015;
-      xOffset *= 0.0015;
-    }
+    xSteer = xSteerSup.get();
     
-
-
-    RobotContainer.m_DriveTrain.arcadeDrive(forwardSpeed, xSteer * -1000 * 1.65);
-
+    if(xSteer > 0.2){
+      adjustSteer = xSteer * 0.015;
+      adjustSteer = adjustSteer * steerScale;
+    }else if(xSteer < -0.2){
+      adjustSteer = xSteer * 0.015;
+      adjustSteer = adjustSteer * steerScale;
+    }else{
+      adjustSteer = 0;
+    }
+    RobotContainer.m_DriveTrain.arcadeDrive(speedSet, adjustSteer * -1000 * 1.65);
   }
 
   // Called once the command ends or is interrupted.
@@ -52,6 +56,11 @@ public class RunForTarget extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    // if(areaOfTargetSup >= 1.35){
+    //   return true;
+    // }else{
+    //   return false;
+    // }
     return false;
   }
 }

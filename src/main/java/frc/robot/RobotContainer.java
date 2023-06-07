@@ -27,7 +27,7 @@ import frc.robot.commands.DriveTrainCommands.MoveForDistance;
 import frc.robot.commands.IntakeCommands.ManualIntake;
 import frc.robot.commands.SetPoints.Home;
 import frc.robot.commands.TurretCommands.ManualTurretSpin;
-import frc.robot.commands.VisionCommands.TurnToTarget;
+import frc.robot.commands.VisionCommands.RunForTarget;
 import frc.robot.subsystems.ArmExtend;
 import frc.robot.subsystems.ArmLift;
 import frc.robot.subsystems.Intake;
@@ -115,6 +115,8 @@ public class RobotContainer {
         .onTrue(new ExampleCommand(m_exampleSubsystem));
 
     m_DriveTrain.setDefaultCommand(new GTADrive());
+    m_ButtonBind.driverBButton.whileTrue(new RunForTarget(.4, intaketx));
+
     
 
     //turret
@@ -127,9 +129,6 @@ public class RobotContainer {
 
     //setpoints
     m_ButtonBind.buttonSeven.onTrue(new Home());
-
-    //vision
-    //m_ButtonBind.auxYButton.whileTrue(new TurnToTarget(.3));
 
     //arm lift
     m_ButtonBind.auxleftJoystickYdown.whileTrue(new ManualArmLift(-.3));

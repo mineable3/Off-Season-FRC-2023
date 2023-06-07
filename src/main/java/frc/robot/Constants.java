@@ -30,6 +30,9 @@ public final class Constants {
   public static final double driveSpeedMultiplier = .8;
   public static final double turretSpeedMultiplier = .2;
   public static final double driveTrainGearRatio = 15.87;
+
+  public static final double visionConstant = 0.0015;
+
   
 
 
@@ -45,4 +48,7 @@ public final class Constants {
     public static final int kDriverControllerPort = 0;
     public static final int kAuxControllerPort = 1;
   }
+
+
+
 }

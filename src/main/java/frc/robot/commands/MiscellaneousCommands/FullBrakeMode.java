@@ -14,6 +14,11 @@ public class FullBrakeMode extends CommandBase {
   /** Creates a new FullBrakeMode. */
   public FullBrakeMode() {
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(RobotContainer.m_ArmExtend);
+    addRequirements(RobotContainer.m_ArmLift);
+    addRequirements(RobotContainer.m_Intake);
+    addRequirements(RobotContainer.m_Turret);
+
   }
 
   // Called when the command is initially scheduled.
