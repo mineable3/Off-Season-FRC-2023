@@ -19,12 +19,12 @@ public class RunForTarget extends CommandBase {
   private AtomicReference<Double> xSteerSup;
 
 
-  public RunForTarget(double speed, AtomicReference <Double> xSteering) {
+  public RunForTarget(double speed, AtomicReference<Double> xSteering) {
 
     addRequirements(RobotContainer.m_DriveTrain);
     speedSet = speed;
     xSteerSup = xSteering;
-    xSteer = xSteerSup.get();
+    xSteer = xSteering.get();
     }
 
   // Called when the command is initially scheduled.

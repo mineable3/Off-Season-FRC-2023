@@ -21,7 +21,14 @@ public class GTADrive extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    RobotContainer.m_DriveTrain.getleftmotor1().setOpenLoopRampRate(1);
+    RobotContainer.m_DriveTrain.getleftmotor2().setOpenLoopRampRate(1);
+    RobotContainer.m_DriveTrain.getleftmotor3().setOpenLoopRampRate(1);
+    RobotContainer.m_DriveTrain.getrightmotor1().setOpenLoopRampRate(1);
+    RobotContainer.m_DriveTrain.getrightmotor2().setOpenLoopRampRate(1);
+    RobotContainer.m_DriveTrain.getrightmotor3().setOpenLoopRampRate(1);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
